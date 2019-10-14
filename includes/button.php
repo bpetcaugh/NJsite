@@ -9,7 +9,6 @@
 		<input type="file" name="to_upload" id="to_upload">
 		<input type="submit" value="upload file" name="submit">
 	</form>
-</div>
 <?php
 function ne($v) {
 	return $v != "";
@@ -37,3 +36,4 @@ if ($upload_ok == 0) { ?>
 	<!-- i could not figure out a way to make this dynamic but if someone happens to know something go for it -->
 	<span class="upload_fail">Sorry! The upload failed because the file specified is not a pdf, docx, or doc file.</span>
 <?php } ?>
+</div>
