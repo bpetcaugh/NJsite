@@ -9238,4 +9238,8 @@ ul ul a {
     margin-left: -200px;
   }
 }
+.modal-backdrop {
+  /* bug fix - no overlay */    
+  display: none;    
+}
 /*# sourceMappingURL=dashboard.css.map */
