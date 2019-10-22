@@ -38,7 +38,8 @@
 				<table>
 					<tr>
 						<td width="25%">
-							<a href="NJadminpage.html"><img src="icon-login.png" width="45px"></a>
+							<a href="NJadminpage.html" data-toggle="modal" data-target="#modalLoginForm"><img src="icon-login.png" width="45px"> 
+							</a>
 						</td>
 						<td width="75%" style="padding-left: 15px;">
 							<h3>Navigation</h3>
@@ -171,6 +172,49 @@
 			</div>
 		</div>
 
+<<<<<<< HEAD:NJPage.html
+
+			<!-- Modal -->
+			<div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+			  <div class="modal-content">
+				<div class="modal-header text-center">
+				  <h4 class="modal-title w-100 font-weight-bold">Sign in</h4>
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+				<div class="modal-body mx-3">
+				  <div class="md-form mb-5">
+					<input type="username" id="defaultForm-username" class="form-control validate">
+					<label  for="defaultForm-username">Your username</label>
+				  </div>
+		  
+				  <div class="md-form mb-4">
+					<center><i class="fas fa-lock prefix grey-text"></i></center>
+					<input type="password" id="defaultForm-pass" class="form-control validate">
+					<label  for="defaultForm-pass">Your password</label>
+				  </div>
+		  
+				</div>
+				<div class="modal-footer d-flex justify-content-center">
+				  <button class="btn btn-default">Login</button>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		  
+
+
+
+	<!-- Java script libraries -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	<script src="NJPage.js"></script>
+=======
 	<?php include("./includes/jslibraries.php"); ?>
+>>>>>>> 1dc271a4115327fb7a94838015383947a529d896:NJPage.php
 </body>
 </html>

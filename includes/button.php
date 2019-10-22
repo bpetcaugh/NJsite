@@ -6,7 +6,7 @@
 
 <div class="upload">
 	<form action="upload.php" method="post" enctype="multipart/form-data">
-		<input type="file" name="to_upload" id="to_upload">
+		<input type="file" name="to_upload[]" id="to_upload" multiple="multiple">
 		<input type="submit" value="upload file" name="submit">
 	</form>
 <?php
