@@ -9239,12 +9239,8 @@ ul ul a {
   }
 }
 
-.upload_fail {
-	/* things */
-}
-
-.upload_success {
-	/* things */
+.upload-highlight {
+	/* do something with the border maybe?? */
 }
 
 /*# sourceMappingURL=dashboard.css.map */
