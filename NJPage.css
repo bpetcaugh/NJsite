@@ -9238,6 +9238,7 @@ ul ul a {
     margin-left: -200px;
   }
 }
+<<<<<<< HEAD
 
 .modal-backdrop {
   /* bug fix - no overlay */
@@ -9248,4 +9249,6 @@ ul ul a {
 	/* do something with the border maybe?? */
 }
 
+=======
+>>>>>>> parent of 33fb939... Log in modal
 /*# sourceMappingURL=dashboard.css.map */

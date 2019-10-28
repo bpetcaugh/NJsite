@@ -12,6 +12,7 @@ $(document).ready(function () {
         }
     });
 
+	// uploads
 	$("div.upload").each((i, elem) => {
 		elem.id = i.toString();
 
@@ -36,18 +37,21 @@ $(document).ready(function () {
 
 		elem.on("drop", e => {
 			e.dataTransfer.files.forEach(file => {
+				let url = "./upload.php";
+				let xhr = new XMLHttpRequest();
 				let formData = new FormData();
+				xhr.open("POST", url, true);
+
+				xhr.addEventListener("readystatechange", el => {
+					if (xhr.readyState == 4 && xhr.status == 200) {
+						// upload done
+					} else if (xhr.readyState == 4 && xhr.status != 200) {
+						// error
+					}
+				});
 
 				formData.append("file", file);
-
-				fetch("", {
-					method: "POST",
-					body: formData
-				}).then(() => {
-					// upload successful
-				}).catch(() => {
-					// upload failed
-				});
+				xhr.send(formData);
 			});
 		});
 	});
