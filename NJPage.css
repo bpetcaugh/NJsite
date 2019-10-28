@@ -9238,13 +9238,24 @@ ul ul a {
     margin-left: -200px;
   }
 }
+<<<<<<< HEAD
+<<<<<<< HEAD
 
-.upload_fail {
-	/* things */
+.modal-backdrop {
+  /* bug fix - no overlay */
+  display: none;
 }
 
-.upload_success {
-	/* things */
+.upload-highlight {
+	/* do something with the border maybe?? */
 }
 
+=======
+>>>>>>> parent of 33fb939... Log in modal
+=======
+.modal-backdrop {
+  /* bug fix - no overlay */    
+  display: none;    
+}
+>>>>>>> parent of 2483a4f... upload function handles multiple files. this is awful. this is the worst
 /*# sourceMappingURL=dashboard.css.map */
