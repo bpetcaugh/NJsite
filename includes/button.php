@@ -1,13 +1,11 @@
 <!---
 	in php.ini file_uploads needs to be set to "On" (file_uploads = On)
-
 	it would be 100% ok to change the button style, but that is too much work for me considering you'd have to do some sneaky things like `position: absolute` and `opacity: 0` to the button that comes from the input tag under the form, followed by a div styled however you want to take the button's place, and i don't particularly want to put that much effort into something that isn't too important
 -->
 
 <div class="upload">
 	<form action="upload.php" method="post" enctype="multipart/form-data">
-		<input type="file" name="to_upload[]" id="to_upload" multiple="multiple" onchange="handleFiles(this.files);">
-		<label class="button" for="to_upload[]">select files</label>
+		<input type="file" name="to_upload" id="to_upload">
 		<input type="submit" value="upload file" name="submit">
 	</form>
 <?php
