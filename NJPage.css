@@ -9238,8 +9238,13 @@ ul ul a {
     margin-left: -200px;
   }
 }
-.modal-backdrop {
-  /* bug fix - no overlay */    
-  display: none;    
+
+.upload_fail {
+	/* things */
 }
+
+.upload_success {
+	/* things */
+}
+
 /*# sourceMappingURL=dashboard.css.map */
