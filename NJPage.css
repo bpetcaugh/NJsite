@@ -9239,6 +9239,7 @@ ul ul a {
   }
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 .modal-backdrop {
   /* bug fix - no overlay */
@@ -9251,4 +9252,10 @@ ul ul a {
 
 =======
 >>>>>>> parent of 33fb939... Log in modal
+=======
+.modal-backdrop {
+  /* bug fix - no overlay */    
+  display: none;    
+}
+>>>>>>> parent of 2483a4f... upload function handles multiple files. this is awful. this is the worst
 /*# sourceMappingURL=dashboard.css.map */
