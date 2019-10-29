@@ -10,18 +10,17 @@ $upload_ok = $_POST["upload_ok"];
 //     $upload_ok = 2;
 // }
 // we dont need to restrict ourselves to this either!!
+//
+// if (! in_array(pathinfo($_FILES["to_upload"]["name"], PATHINFO_EXTENSION), [
+// 	0 => "doc",
+// 	1 => "docx",
+// 	2 => "pdf",
+// ])) {
+// 	$upload_ok = 3;
+// }
 
-if (! in_array(pathinfo($_FILES["to_upload"]["name"], PATHINFO_EXTENSION), [
-	0 => "doc",
-	1 => "docx",
-	2 => "pdf",
-])) {
-	$upload_ok = 3;
-}
-
-// check if $upload_ok is set to 0 by an error
 if (move_uploaded_file($_FILES["to_upload"]["tmp_name"], $target_file)) {
-        $upload_ok = 1;
+    $upload_ok = 1;
 } else {
     $upload_ok = 0; // unknown error
 }
