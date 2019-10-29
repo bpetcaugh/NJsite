@@ -24,15 +24,15 @@ if ($ok) {
 if ($upload_ok == 0) { ?>
 	<!-- unknown error, probably server-related -->
 	<span class="upload_fail">Sorry, the upload failed! Please try again.</span>
-<?php } elseif ($upload_ok == 1) { ?>
-	<!-- success -->
+<!-- < ?php } elseif ($upload_ok == 1) { ?>
+	<!- success -
 	<span class="upload_success">File successfully uploaded!</span>
 <?php } elseif ($upload_ok == 2) { ?>
-	<!-- file exists. ignore this if you allow for replacement in upload.php -->
+	<!- file exists. ignore this if you allow for replacement in upload.php -
 	<span class="upload_fail">Sorry! The upload failed because the file already exists on the server.</span>
 <?php } elseif ($upload_ok == 3) { ?>
-	<!-- invalid file format -->
-	<!-- i could not figure out a way to make this dynamic but if someone happens to know something go for it -->
-	<span class="upload_fail">Sorry! The upload failed because the file specified is not a pdf, docx, or doc file.</span>
+	<!- invalid file format -
+	<!- i could not figure out a way to make this dynamic but if someone happens to know something go for it -
+	<span class="upload_fail">Sorry! The upload failed because the file specified is not a pdf, docx, or doc file.</span> -->
 <?php } ?>
 </div>
