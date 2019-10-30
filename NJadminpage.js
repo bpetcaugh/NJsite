@@ -1,3 +1,4 @@
+'esversion: 6';
 // UNTESTED
 // css selectors are illegible :)
 
@@ -6,10 +7,10 @@ function get_file_tree() {
 	let err = false;
 
 	// this invokes the php script at includes/policy_tree which is just an invocation of the python script at py/walk_polices.py :)
-	$.ajax(
+	$.ajax({
 		url: '<?php echo site_url("includes/policy_tree.php"); ?>',
 		type: "POST",
-		data: form_data,
+		data: policy_tree,
 		dataType: "json",
 		success: data => {
 			if (data.error !== 0) {
@@ -18,7 +19,7 @@ function get_file_tree() {
 				alert("error: could not index policies");
 			}
 		}
-	);
+	});
 	if (!err) {
 		return policy_tree;
 	}
@@ -50,7 +51,7 @@ $(document).ready(function() {
 			volume_select += "</select>";
 
 			// i should not be let near functional programming
-			children = [volume_select, "<br>",`<select name="chapter" class="policy-control form-control">
+			let children = [volume_select, "<br>",`<select name="chapter" class="policy-control form-control">
 			</select>`, "<br>", `<select name="subchapter" class="policy-control form-control">
 			</select>`, "<br>", `<select name="policy" class="policy-control form-control">
 			</select>`, "<br>"];
@@ -107,7 +108,7 @@ $("select.policy-control").change(function() {
 		break;
 	case "policy":
 		if ($(this).parent().hasClass("policy-download")) {
-			let docpath = "/".join("../res/policies", cool(self, "volume"), cool(self, "chapter"), cool(self, "subchapter"), cool(self, "policy"))
+			let docpath = "/".join("../res/policies", cool($(this), "volume"), cool($(this), "chapter"), cool($(this), "subchapter"), cool($(this), "policy"))
 			$(this).parent().children("form:has(button#policy-download-word)").attr("action", docpath);
 			$(this).parent().children("form:has(button#policy-download-word) > button#policy-download-word").removeClass("btn-secondary").addClass("btn-primary");
 
