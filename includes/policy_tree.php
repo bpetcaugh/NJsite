@@ -5,5 +5,8 @@
 
 	// why is json included with php
 	$tree = json_decode($ouput);
-	print json_encode(array("policies"=>$tree));
+
+	// error checking!!
+	$err = json_last_error();
+	print json_encode(array("policies"=>{}, "error"=>$err));
 ?>

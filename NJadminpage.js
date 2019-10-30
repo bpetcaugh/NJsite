@@ -11,8 +11,10 @@ function get_file_tree() {
 		data: form_data,
 		dataType: "json",
 		success: data => {
-			// note: this is terrible. please implement some way to check for errors. what were you thinking
-			return true;
+			if (data.error !== 0) {
+				// there's got to be a better way
+				alert("error: could not index policies");
+			}
 		}
 	);
 	return policy_tree;
@@ -32,6 +34,7 @@ function download_policy(self, filetype) {
 		// i so desperately wish i could use map
 		file_location = "/".join("../res/policies", cool(self, "volume"), cool(self, "chapter"), cool(self, "subchapter"), cool(self, "policy"));
 	}
+
 }
 
 $(document).ready(function() {
