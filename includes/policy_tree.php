@@ -7,5 +7,5 @@
 
 	// error checking!!
 	$err = json_last_error();
-	print json_encode(array("policies"=>{}, "error"=>$err));
+	print json_encode(array("policies"=>$tree, "error"=>$err));
 ?>
