@@ -103,7 +103,6 @@ $("select.policy-control").change(function() {
 	}
 
 	keys.each((ind, elem) => {
-		// policy categories dont have versions
 		options += '\n\t<option value="' + elem + '">' + elem + '</option>';
 	});
 
