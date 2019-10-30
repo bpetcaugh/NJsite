@@ -101,17 +101,23 @@ $("select.policy-control").change(function() {
 	} else if ($(this).attr("name") == "subchapter") {
 		keys = policy_tree.policies[cool($(this), "volume")][cool($(this), "chapter")][cool($(this), "subchapter")].keys();
 	}
-	if ($(this).attr("name") == "subchapter") {
-		keys.each((ind, elem) => {
-			// modify this line when matt decides the naming scheme for the files. don't want version denotation appearing on the website
-			options += '\n\t<option value="' + elem + '">' + elem + '</option>';
-		});
-	} else {
-		keys.each((ind, elem) => {
-			// policy categories dont have versions
-			options += '\n\t<option value="' + elem + '">' + elem + '</option>';
-		});
-	}
+
+	keys.each((ind, elem) => {
+		// policy categories dont have versions
+		options += '\n\t<option value="' + elem + '">' + elem + '</option>';
+	});
+
+	// if ($(this).attr("name") == "subchapter") {
+	// 	keys.each((ind, elem) => {
+	// 		// modify this line when matt decides the naming scheme for the files. don't want version denotation appearing on the website
+	// 		options += '\n\t<option value="' + elem + '">' + elem + '</option>';
+	// 	});
+	// } else {
+	// 	keys.each((ind, elem) => {
+	// 		// policy categories dont have versions
+	// 		options += '\n\t<option value="' + elem + '">' + elem + '</option>';
+	// 	});
+	// }
 
 	// populate the options of the following select element now that specificity has increased by a degree
 	if ($(this).attr("name") != "policy") {
