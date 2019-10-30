@@ -1,6 +1,6 @@
 <?php
 	// i hope this is a linux server
-	$command = escapeshellcmd('python3 ../py/walk_policies.py');
+	$command = escapeshellcmd('python3 ../res/py/walk_policies.py');
 	$output = shell_exec($command);
 
 	// why is json included with php

@@ -14,7 +14,4 @@ for path, dirs, files in os.walk(rootdir):
     parent = reduce(dict.get, folders[:-1], dir)
     parent[folders[-1]] = subdir
 
-# this should be modified when matt comes up with whatever naming scheme he wants
-# once that happens the script will pick those with the largest version numbers
-
 print(json.dumps(dir["policies"]))

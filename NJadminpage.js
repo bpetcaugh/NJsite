@@ -30,7 +30,7 @@ function download_policy(self, filetype) {
 
 	if (self.parent().children('select[name="subchapter"] .policy-control').children('option[selected="selected"]').length > 0) {
 		// i so desperately wish i could use map
-		file_location = "/".join("../policies", cool(self, "volume"), cool(self, "chapter"), cool(self, "subchapter"), cool(self, "policy"));
+		file_location = "/".join("../res/policies", cool(self, "volume"), cool(self, "chapter"), cool(self, "subchapter"), cool(self, "policy"));
 	}
 }
 
