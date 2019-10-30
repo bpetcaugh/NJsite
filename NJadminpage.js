@@ -2,23 +2,24 @@
 // css selectors are illegible :)
 
 function get_file_tree() {
-	let policy_tree = new FormData();
+	let policy_tree = {};
 	let err = false;
 
 	// this invokes the php script at includes/policy_tree which is just an invocation of the python script at py/walk_polices.py :)
 	$.ajax({
-		url: "includes/policy_tree.php",
-		type: "POST",
-		data: policy_tree,
+		url: "./includes/policy_tree.php",
+		type: "post",
 		datatype: "json",
 		success: (data, textStatus, xhr) => {
+			policy_tree = data;
 			if (data.error !== 0) {
 				// theres got to be a better way
 				err = true;
-				alert("error: could not index policies");
+				alert("error: could not index policies\nERROR CODE " + Number(err));
 			}
 		}
 	});
+	console.log(policy_tree);
 	if (!err) {
 		return policy_tree;
 	}
