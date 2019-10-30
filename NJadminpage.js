@@ -1,4 +1,3 @@
-'esversion: 6';
 // UNTESTED
 // css selectors are illegible :)
 
