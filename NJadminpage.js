@@ -3,7 +3,7 @@
 
 function get_file_tree() {
 	let policy_tree = new FormData();
-	var err = false;
+	let err = false;
 
 	// this invokes the php script at includes/policy_tree which is just an invocation of the python script at py/walk_polices.py :)
 	$.ajax(
@@ -31,17 +31,6 @@ function cool(self, section_type) {
 	return self.parent().children("select[name=\"" + section_type + "\"] .policy-control")[0].children("option[selected=\"selected\"]")[0].attr("value");
 }
 
-function download_policy(self, filetype) {
-	// just make sure we convert to docx if filetype is "word" and we're good
-	// i have no idea how to download and i do not have internet access at the time of editing this
-
-	if (self.parent().children('select[name="subchapter"] .policy-control').children('option[selected="selected"]').length > 0) {
-		// i so desperately wish i could use map
-		file_location =
-	}
-
-}
-
 $(document).ready(function() {
 	var policy_tree = get_file_tree();
 	if (!policy_tree) return;
@@ -50,7 +39,7 @@ $(document).ready(function() {
 		// populate volume dropdown if the div is empty (it probably will be)
 		if ($(this).contents().length == 0) {
 			// using strings at html elements is an awful idea. rewrite to use objects later
-			var volume_select = '<select name="volume" class="policy-control form-control">';
+			let volume_select = '<select name="volume" class="policy-control form-control">';
 
 			// sort the keys alphabetically so they are in volume order least -> greatest
 			let volumes = policy_tree.policies.keys();
@@ -97,14 +86,14 @@ $("select.policy-control").change(function() {
 	if ($(this).contents().length == 0) return;
 
 	// update the tree
-	var policy_tree = get_file_tree();
+	let policy_tree = get_file_tree();
 	if (!policy_tree) return; // i made error checking look!!
 
 	// keys is going to be the list of names of possible options for the current select field
-	var keys = [];
+	let keys = [];
 
-	// options is the generated html based on the names
-	var options = "";
+	// options is the generated html based on keys the names
+	let options = "";
 
  	switch ($(this).attr("name")) {
 	case "volume":
@@ -145,12 +134,4 @@ $("select.policy-control").change(function() {
 
 		$(this).parent().children('select[name="' + categories[categories.index($(this).attr("name"))+1] + '"] .policy-control')[0].html(options);
 	}
-});
-
-$("button#policy-download-word").click(function() {
-	download_policy($(this), "word");
-});
-
-$("button#policy-download-pdf").click(function() {
-	download_policy($(this), "pdf");
 });
