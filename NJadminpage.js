@@ -22,7 +22,7 @@ function get_file_tree() {
 	if (!err) {
 		return policy_tree;
 	}
-	return {};
+	return false;
 }
 
 // sorry wasn't sure what to name this function
@@ -37,13 +37,14 @@ function download_policy(self, filetype) {
 
 	if (self.parent().children('select[name="subchapter"] .policy-control').children('option[selected="selected"]').length > 0) {
 		// i so desperately wish i could use map
-		file_location = "/".join("../res/policies", cool(self, "volume"), cool(self, "chapter"), cool(self, "subchapter"), cool(self, "policy"));
+		file_location =
 	}
 
 }
 
 $(document).ready(function() {
 	var policy_tree = get_file_tree();
+	if (!policy_tree) return;
 
 	$("div.policy-selection").each((ind, elem) => {
 		// populate volume dropdown if the div is empty (it probably will be)
@@ -65,9 +66,13 @@ $(document).ready(function() {
 			</select>`, "<br>", `<select name="policy" class="policy-control form-control">
 			</select>`, "<br>"];
 
-			if ($(this).attr("class").split(" ").contains("policy-download")) {
-				children += ["<button type=\"button\" class=\"btn btn-primary\" id=\"policy-download-word\">Download Document (Word)</button>", "<button type=\"button\" class=\"btn btn-primary\" id=\"policy-download-pdf\">Download Document (PDF)</button>"];
-			} else if ($(this).attr("class").split(" ").contains("policy-upload")) {
+			if ($(this).hasClass("policy-download")) {
+				children += [`<form method="get" action="">
+					<button type="button" class="btn btn-secondary" id="policy-download-word">Download Document (Word)</button>
+				</form>`, `<form method="get" action="">
+					<button type="button" class="btn btn-secondary" id="policy-download-pdf">Download Document (PDF)</button>
+				</form>`];
+			} else if ($(this).hasClass("policy-upload")) {
 				children += [`<form>
 					<p>Describe what changes you are making in the document. Then upload the
 						new version (*This will include directions on what the file name should be*).
@@ -89,12 +94,11 @@ $(document).ready(function() {
 
 $("select.policy-control").change(function() {
 	// if there are no options in the element and it somehow fired a change event do nothing
-	if ($(this).contents().length == 0) {
-		return;
-	}
+	if ($(this).contents().length == 0) return;
 
 	// update the tree
 	var policy_tree = get_file_tree();
+	if (!policy_tree) return; // i made error checking look!!
 
 	// keys is going to be the list of names of possible options for the current select field
 	var keys = [];
@@ -102,29 +106,36 @@ $("select.policy-control").change(function() {
 	// options is the generated html based on the names
 	var options = "";
 
-	if ($(this).attr("name") == "volume") {
+ 	switch ($(this).attr("name")) {
+	case "volume":
 		keys = policy_tree.policies[$(this).children('option[selected="selected"]')[0].attr("value")].keys();
-	} else if ($(this).attr("name") == "chapter") {
+		break;
+	case "chapter":
 		keys = policy_tree.policies[cool($(this), "volume")][cool($(this), "chapter")].keys();
-	} else if ($(this).attr("name") == "subchapter") {
+		break;
+	case "subchapter":
 		keys = policy_tree.policies[cool($(this), "volume")][cool($(this), "chapter")][cool($(this), "subchapter")].keys();
+		break;
+	case "policy":
+		if ($(this).parent().hasClass("policy-download")) {
+			let docpath = "/".join("../res/policies", cool(self, "volume"), cool(self, "chapter"), cool(self, "subchapter"), cool(self, "policy"))
+			$(this).parent().children("form:has(button#policy-download-word)").attr("action", docpath);
+			$(this).parent().children("form:has(button#policy-download-word) > button#policy-download-word").removeClass("btn-secondary").addClass("btn-primary");
+
+			// conversions need to happen here. uncomment the lines below after the file conversion stuff has been implemented
+			let pdfpath = "";
+			// $(this).parent().children("form:has(button#policy-download-pdf)").attr("action", pdfpath);
+			// $(this).parent().children("form:has(button#policy-download-pdf) > button#policy-download-pdf").removeClass("btn-secondary").addClass("btn-primary");
+		}
+		// no break statement because i want it to fall through to the return in the default block
+		// this is on purpose. no one correct this
+	default:
+		return;
 	}
 
 	keys.each((ind, elem) => {
 		options += '\n\t<option value="' + elem + '">' + elem + '</option>';
 	});
-
-	/*if ($(this).attr("name") == "subchapter") {
-		keys.each((ind, elem) => {
-			// modify this line when matt decides the naming scheme for the files. don't want version denotation appearing on the website
-			options += '\n\t<option value="' + elem + '">' + elem + '</option>';
-		});
-	} else {
-		keys.each((ind, elem) => {
-			// policy categories dont have versions
-			options += '\n\t<option value="' + elem + '">' + elem + '</option>';
-		});
-	}*/
 
 	// populate the options of the following select element now that specificity has increased by a degree
 	if ($(this).attr("name") != "policy") {
