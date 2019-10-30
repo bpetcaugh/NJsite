@@ -2,6 +2,15 @@
 $target_dir = "/var/www/html/students/jnijs/uploads/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $upload_ok = $_POST["upload_ok"];
+$servername = "localhost";
+$username = "njsite";
+$password = "nj1234";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password);
+$sql = "SELECT * FROM `Policies`";
+$result=mysqli_query($conn, $sql);
+
 
 // uncomment below if you want it/want to ask the admin if they really want to replace the file, but i suspect that we won't need it
 // // check if the file exists. we can have an option to ignore this on the form
