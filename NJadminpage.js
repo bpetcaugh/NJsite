@@ -3,6 +3,7 @@
 
 function get_file_tree() {
 	let policy_tree = new FormData();
+	var err = false;
 
 	// this invokes the php script at includes/policy_tree which is just an invocation of the python script at py/walk_polices.py :)
 	$.ajax(
@@ -13,11 +14,15 @@ function get_file_tree() {
 		success: data => {
 			if (data.error !== 0) {
 				// theres got to be a better way
+				err = true;
 				alert("error: could not index policies");
 			}
 		}
 	);
-	return policy_tree;
+	if (!err) {
+		return policy_tree;
+	}
+	return {};
 }
 
 // sorry wasn't sure what to name this function
