@@ -1,6 +1,3 @@
-// UNTESTED
-// css selectors are illegible :)
-
 function get_file_tree() {
 	let policy_tree = {};
 	let err = false;
@@ -32,7 +29,20 @@ function cool(self, section_type) {
 	return self.parent().children("select[name=\"" + section_type + "\"] .policy-control")[0].children("option[selected=\"selected\"]")[0].attr("value");
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
+    if($(window).height() <= 675) { // Toggle elements on mobile
+        $('#sidebar').toggleClass('active');
+        $('#sidebarCollapse').toggleClass('acive');
+    }
+
+    $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+        $(this).toggleClass('active');
+        if($(window).height() <= 675) { // Toggle elements on mobile
+            $(".headerLogo").toggle();
+        }
+    });
+
 	var policy_tree = get_file_tree();
 	if (!policy_tree) return;
 
