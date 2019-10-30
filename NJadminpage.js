@@ -12,7 +12,7 @@ function get_file_tree() {
 		dataType: "json",
 		success: data => {
 			if (data.error !== 0) {
-				// there's got to be a better way
+				// theres got to be a better way
 				alert("error: could not index policies");
 			}
 		}
