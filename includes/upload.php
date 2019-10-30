@@ -8,7 +8,8 @@ $password = "nj1234";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password);
-
+$sql = "SELECT * FROM `Policies`";
+$result=mysqli_query($conn, $sql);
 
 
 // uncomment below if you want it/want to ask the admin if they really want to replace the file, but i suspect that we won't need it
