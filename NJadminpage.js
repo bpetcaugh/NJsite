@@ -7,11 +7,11 @@ function get_file_tree() {
 
 	// this invokes the php script at includes/policy_tree which is just an invocation of the python script at py/walk_polices.py :)
 	$.ajax({
-		url: '<?php echo site_url("includes/policy_tree.php"); ?>',
+		url: "includes/policy_tree.php",
 		type: "POST",
 		data: policy_tree,
-		dataType: "json",
-		success: data => {
+		datatype: "json",
+		success: (data, textStatus, xhr) => {
 			if (data.error !== 0) {
 				// theres got to be a better way
 				err = true;
