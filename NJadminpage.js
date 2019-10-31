@@ -1,3 +1,8 @@
+// unfortunately we cannot create a select tag with the name "ik5sdyufng,jbg" as a result of this hack
+// that element is just a safety net and should never actually be accessed by the script
+var categories = ["volume", "chapter", "subchapter", "policy", "ik5sdyufng,jbg"];
+var ind = (arr, elem) => arr[elem];
+
 function get_file_tree() {
 	let policy_tree = {};
 	let err = false;
@@ -23,10 +28,28 @@ function get_file_tree() {
 	return false;
 }
 
-// sorry wasn't sure what to name this function
-// its just selector garbage to get the name of the selected option in the select element corresponding to the specified name within its div
-function cool(self, section_type) {
-	return self.parent().children("select[name=\"" + section_type + "\"] .policy-control")[0].children("option[selected=\"selected\"]")[0].attr("value");
+function next_field_keys(current, tree) {
+	if (current.attr("name") == "policy") {
+		if (current.parent().hasClass("policy-download")) {
+			let docpath = "/".join(["../res/policies", categories.slice(0, 4).each((ind, elem) => cool(current, elem))].flat());
+			current.parent().children("form:has(button#policy-download-word)").attr("action", docpath);
+			current.parent().children("form:has(button#policy-download-word) > button#policy-download-word").removeClass("btn-secondary").addClass("btn-primary");
+
+			// conversions need to happen here. uncomment the lines below after the file conversion stuff has been implemented
+			let pdfpath = "";
+			// current.parent().children("form:has(button#policy-download-pdf)").attr("action", pdfpath);
+			// current.parent().children("form:has(button#policy-download-pdf) > button#policy-download-pdf").removeClass("btn-secondary").addClass("btn-primary");
+			return [];
+		}
+	} else {
+		keys = [];
+		index_n_times = categories.indexOf(current.attr("name")) + 1;
+		c_tree = tree;
+		for (i = 0; i < index_n_times; i++) {
+			c_tree = c_tree[current.parent().children(`select[name="${categories[i]}"] .policy-control`)[0].children('option[selected="selected"]')[0].attr("value")];
+		}
+		return c_tree.keys();
+	}
 }
 
 $(document).ready(function () {
@@ -50,40 +73,60 @@ $(document).ready(function () {
 		// populate volume dropdown if the div is empty (it probably will be)
 		if ($(this).contents().length == 0) {
 			// using strings at html elements is an awful idea. rewrite to use objects later
-			let volume_select = '<select name="volume" class="policy-control form-control">';
+			let volume_select = $("<select/>", {
+				name: "volume",
+				class: "policy-control form-control"
+			});
 
 			// sort the keys alphabetically so they are in volume order least -> greatest
 			let volumes = policy_tree.policies.keys();
 
 			volumes.each((ind, elem) => {
-				volume_select += '\n\t<option value="' + elem + '">' + elem + '</option>';
+				volume_select.append($("<option/>", {
+					value: elem
+				}).text(elem));
 			});
-			volume_select += "</select>";
 
-			// i should not be let near functional programming
-			let children = [volume_select, "<br>",`<select name="chapter" class="policy-control form-control">
-			</select>`, "<br>", `<select name="subchapter" class="policy-control form-control">
-			</select>`, "<br>", `<select name="policy" class="policy-control form-control">
-			</select>`, "<br>"];
+			let children = [volume_select, $("<br>")];
+			categories.slice(1, 4).each((ind, elem) => {
+				children.push($("<select/>", {
+					name: elem,
+					class: "policy-control form-control"
+				}));
+				children.push($("<br>"));
+			});
 
 			if ($(this).hasClass("policy-download")) {
-				children += [`<form method="get" action="">
-					<button type="button" class="btn btn-secondary" id="policy-download-word">Download Document (Word)</button>
-				</form>`, `<form method="get" action="">
-					<button type="button" class="btn btn-secondary" id="policy-download-pdf">Download Document (PDF)</button>
-				</form>`];
+				["Word", "PDF"].each((ind, elem) => {
+					children.push($("<form/>", {
+						method: "get",
+						action: ""
+					}).append("<button></button>", {
+						class: "btn btn-secondary",
+						id: "policy-download-" + elem.toLowerCase()
+					}).text(`Download Document (${elem})`));
+				});
 			} else if ($(this).hasClass("policy-upload")) {
-				children += [`<form>
-					<p>Describe what changes you are making in the document. Then upload the
-						new version (*This will include directions on what the file name should be*).
-					</p>
-					<textarea rows="6" cols="70"></textarea>
-					<br><br>
-					<p>Upload the new version of your document here:</p>
-					<input type="file" class="filestyle">
-					<br><br>
-					<button type="button" class="btn btn-primary">Update</button>
-				</form>`];
+				// i tried to make this legible
+				[
+					$("<p/>")
+						.text("Describe what changes you are making in the document. Then upload the new version (*This will include directions on what the file name should be*)."),
+					$("<textarea/>", {
+						rows: "6",
+						cols: "70"
+					}),
+					$("<br/>"), $("<br/>"),
+					$("<p/>")
+						.text("Upload the new version of your document here:"),
+					$("<input/>", {
+						type: "file",
+						class: "filestyle"
+					}),
+					$("<br/>"), $("<br/>"),
+					$("<button/>", {
+						class: "btn btn-primary"
+					}).text("Update")
+				].map(children.push);
 			}
 
 			// loops through the array and adds every element specified as a child of the div
@@ -101,48 +144,13 @@ $("select.policy-control").change(function() {
 	if (!policy_tree) return; // i made error checking look!!
 
 	// keys is going to be the list of names of possible options for the current select field
-	let keys = [];
-
-	// options is the generated html based on keys the names
-	let options = "";
-
- 	switch ($(this).attr("name")) {
-	case "volume":
-		keys = policy_tree.policies[$(this).children('option[selected="selected"]')[0].attr("value")].keys();
-		break;
-	case "chapter":
-		keys = policy_tree.policies[cool($(this), "volume")][cool($(this), "chapter")].keys();
-		break;
-	case "subchapter":
-		keys = policy_tree.policies[cool($(this), "volume")][cool($(this), "chapter")][cool($(this), "subchapter")].keys();
-		break;
-	case "policy":
-		if ($(this).parent().hasClass("policy-download")) {
-			let docpath = "/".join("../res/policies", cool($(this), "volume"), cool($(this), "chapter"), cool($(this), "subchapter"), cool($(this), "policy"))
-			$(this).parent().children("form:has(button#policy-download-word)").attr("action", docpath);
-			$(this).parent().children("form:has(button#policy-download-word) > button#policy-download-word").removeClass("btn-secondary").addClass("btn-primary");
-
-			// conversions need to happen here. uncomment the lines below after the file conversion stuff has been implemented
-			let pdfpath = "";
-			// $(this).parent().children("form:has(button#policy-download-pdf)").attr("action", pdfpath);
-			// $(this).parent().children("form:has(button#policy-download-pdf) > button#policy-download-pdf").removeClass("btn-secondary").addClass("btn-primary");
-		}
-		// no break statement because i want it to fall through to the return in the default block
-		// this is on purpose. no one correct this
-	default:
-		return;
-	}
-
-	keys.each((ind, elem) => {
-		options += '\n\t<option value="' + elem + '">' + elem + '</option>';
-	});
+	let keys = next_field_keys($(this), policy_tree.policies);
 
 	// populate the options of the following select element now that specificity has increased by a degree
 	if ($(this).attr("name") != "policy") {
-		// unfortunately we cannot create a select tag with the name "ik5sdyufng,jbg" as a result of this hack
-		// that element is just a safety net and should never actually be accessed by the script
-		let categories = ["volume", "chapter", "subchapter", "policy", "ik5sdyufng,jbg"];
-
-		$(this).parent().children('select[name="' + categories[categories.index($(this).attr("name"))+1] + '"] .policy-control')[0].html(options);
+		// i should not be let near functional programming
+		keys.map(k => $("<option/>", {
+			value: k
+		}).text(k)).map($(this).parent().children('select[name="' + categories[categories.indexOf($(this).attr("name"))+1] + '"] .policy-control')[0].append);
 	}
 });
