@@ -27,8 +27,8 @@ function get_file_tree() {
 	return false;
 }
 
-function cool(self, section_type) {
-	return self.parent().children("select[name=\"" + section_type + "\"] .policy-control")[0].children("option[selected=\"selected\"]")[0].attr("value");
+function selected_option(self, section_type) {
+	return self.parent().children(`select[name="${section_type}"] .policy-control > option[selected="selected"]`).attr("value");
 }
 
 function next_field_keys(current, tree) {
@@ -39,7 +39,7 @@ function next_field_keys(current, tree) {
 		index_n_times = categories.indexOf(current.attr("name")) + 1;
 		c_tree = tree;
 		for (i = 0; i < index_n_times; i++) {
-			c_tree = c_tree[cool(current, categories[i])];
+			c_tree = c_tree[selected_option(current, categories[i])];
 		}
 		return c_tree.keys();
 	}
@@ -47,9 +47,9 @@ function next_field_keys(current, tree) {
 
 function prepare_policy(self) {
 	if (self.parent().hasClass("policy-download")) {
-		let docpath = "/".join(["../res/policies", categories.slice(0, 4).each((ind, elem) => cool(self, elem))].flat());
-		current.parent().children("form:has(button#policy-download-word)").attr("action", docpath);
-		current.parent().children("form:has(button#policy-download-word) > button#policy-download-word").removeClass("btn-secondary").addClass("btn-primary");
+		let docpath = "/".join(["../res/policies", categories.slice(0, 4).each((ind, elem) => selected_option(self, elem))].flat());
+		self.parent().children("form:has(button#policy-download-word)").attr("action", docpath);
+		self.parent().children("form:has(button#policy-download-word) > button#policy-download-word").removeClass("btn-secondary").addClass("btn-primary");
 
 		// conversions need to happen here. uncomment the lines below after the file conversion stuff has been implemented
 		let pdfpath = "";
@@ -58,6 +58,9 @@ function prepare_policy(self) {
 		return [];
 	} else if (self.parent().hasClass("policy-upload")) {
 		// IMPLEMENT UPLOADS AAA
+		policy_upload = new FormData();
+		policy_upload.append("file", self.parent().children());
+
 	}
 }
 
@@ -117,25 +120,29 @@ $(document).ready(() => {
 				});
 			} else if ($(this).hasClass("policy-upload")) {
 				// i tried to make this legible
-				[
-					$("<p/>")
-						.text("Describe what changes you are making in the document. Then upload the new version (*This will include directions on what the file name should be*)."),
-					$("<textarea/>", {
-						rows: "6",
-						cols: "70"
-					}),
-					$("<br/>"), $("<br/>"),
-					$("<p/>")
-						.text("Upload the new version of your document here:"),
-					$("<input/>", {
-						type: "file",
-						class: "filestyle"
-					}),
-					$("<br/>"), $("<br/>"),
-					$("<button/>", {
-						class: "btn btn-secondary"
-					}).text("Update")
-				].map(children.push);
+				[$("<p/>")
+					.text("Describe what changes you are making in the document. Then upload the new version (*This will include directions on what the file name should be*)."),
+				$("<textarea/>", {
+					rows: "6",
+					cols: "70"
+				}),
+				$("<br/>"), $("<br/>"),
+				$("<p/>")
+					.text("Upload the new version of your document here:"),
+				$("<form/>", {
+					action: "../includes/upload.php",
+					method: "post",
+					enctype: "multipart/form-data"
+				}).append($("<input/>", {
+					type: "file",
+					id: "policy-upload",
+					class: "filestyle",
+					name: "to_upload"
+				})).append($("<br/>")).append($("<br/>")).append($("<input/>", {
+					id: "policy-submit",
+					class: "btn btn-secondary",
+					value: "Update"
+				}).text("Update"))].map(children.push);
 			}
 
 			// loops through the array and adds every element specified as a child of the div
@@ -163,7 +170,7 @@ $("select.policy-control").change(function() {
 	// this fixes the problem when, if, for example, chapter is changed while policy is set, the policy and subchapter fields are not reset and an invalid path is created
 	if (!set.every((elem) => elem)) {
 		categories.slice(set.indexOf(false)+1, categories.length-1).each((ind, elem) => {
-			cool(self, elem).html("");
+			selected_option(self, elem).html("");
 		});
 		["word", "pdf"].each((ind, elem) => {
 			self.parent().children(`form:has(button#policy-download-${elem})`).attr("action", "");
@@ -179,8 +186,8 @@ $("select.policy-control").change(function() {
 		// i should not be let near functional programming
 		keys.map(k => $("<option/>", {
 			value: k
-		}).text(k)).map(self.parent().children('select[name="' + categories[categories.indexOf($(this).attr("name"))+1] + '"] .policy-control')[0].append);
+		}).text(k)).map(self.parent().children('select[name="' + categories[categories.indexOf($(this).attr("name"))+1] + '"] .policy-control').append);
 	} else {
-		set_policy(self);
+		prepare_policy(self);
 	}
 });

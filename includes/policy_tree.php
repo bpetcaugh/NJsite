@@ -2,7 +2,7 @@
 	// i hope this is a linux server
 	$output = shell_exec('python3 ../res/py/walk_policies.py');
 
-	// why is json included with php
+	// why is json included with php like this
 	$tree = json_decode($ouput);
 
 	// error checking!!

@@ -160,6 +160,6 @@ $("select.policy-control").change(function() {
 			value: k
 		}).text(k)).map(self.parent().children('select[name="' + categories[categories.indexOf($(this).attr("name"))+1] + '"] .policy-control')[0].append);
 	} else {
-		set_policy(self);
+		prepare_policy(self);
 	}
 });
