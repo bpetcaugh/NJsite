@@ -52,13 +52,13 @@ function next_field_keys(current, tree) {
 	}
 }
 
-$(document).ready(function () {
+$(document).ready(() => {
     if($(window).height() <= 675) { // Toggle elements on mobile
         $('#sidebar').toggleClass('active');
         $('#sidebarCollapse').toggleClass('acive');
     }
 
-    $('#sidebarCollapse').on('click', function () {
+    $('#sidebarCollapse').on('click', () => {
         $('#sidebar').toggleClass('active');
         $(this).toggleClass('active');
         if($(window).height() <= 675) { // Toggle elements on mobile
