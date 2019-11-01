@@ -68,6 +68,7 @@
 
                 <h3>Download Document Version</h3>
 				<!-- innerHTML of this element and any other with the class policy-selection is manually set please dont touch it ok -->
+				<div class="form-group policy-selection policy-download"></div>
 				<br><br>
 				<h3>Update Document Version</h3>
 	            <div class="form-group policy-selection policy-upload"></div>
