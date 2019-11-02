@@ -59,8 +59,15 @@ function prepare_policy(self) {
 	} else if (self.parent().hasClass("policy-upload")) {
 		// IMPLEMENT UPLOADS AAA
 		policy_upload = new FormData();
-		policy_upload.append("file", self.parent().children());
+		policy_upload.append("to_upload", self.parent().children('input#policy-upload[type="file"]').prop("file"));
 
+		$.ajax({
+			url: "./includes/upload.php",
+			dataType: "text",
+			data: policy_upload,
+			success: response => alert(response),
+			error: response => alert(response)
+		});
 	}
 }
 
@@ -129,16 +136,14 @@ $(document).ready(() => {
 				$("<br/>"), $("<br/>"),
 				$("<p/>")
 					.text("Upload the new version of your document here:"),
-				$("<form/>", {
-					action: "../includes/upload.php",
-					method: "post",
-					enctype: "multipart/form-data"
-				}).append($("<input/>", {
+				$("<input/>", {
 					type: "file",
 					id: "policy-upload",
 					class: "filestyle",
 					name: "to_upload"
-				})).append($("<br/>")).append($("<br/>")).append($("<input/>", {
+				}),
+				$("<br/>"), $("<br/>"),
+				$("<input/>", {
 					id: "policy-submit",
 					class: "btn btn-secondary",
 					value: "Update"
