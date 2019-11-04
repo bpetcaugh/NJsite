@@ -81,7 +81,7 @@ $(document).ready(() => {
 			});
 
 			// sort the keys alphabetically so they are in volume order least -> greatest
-			let volumes = policy_tree.policies.keys();
+			let volumes = policy_tree.keys();
 
 			volumes.each((ind, elem) => {
 				volume_select.append($("<option/>", {
@@ -169,7 +169,7 @@ $("select.policy-control").change(function() {
 	// populate the options of the following select element now that specificity has increased by a degree
 	if ($(this).attr("name") != "policy") {
 		// keys is going to be the list of names of possible options for the current select field
-		let keys = next_field_keys(self, policy_tree.policies);
+		let keys = next_field_keys(self, policy_tree);
 
 		// i should not be let near functional programming
 		keys.map(k => $("<option/>", {
