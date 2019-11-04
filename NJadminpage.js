@@ -43,6 +43,7 @@ function prepare_policy(self) {
 		// IMPLEMENT UPLOADS AAA
 		policy_upload = new FormData();
 		policy_upload.append("to_upload", self.parent().children('input#policy-upload[type="file"]').prop("file"));
+		policy_upload.append("reason", self.parent().children())
 
 		$.ajax({
 			url: "./includes/upload.php",
@@ -114,7 +115,8 @@ $(document).ready(() => {
 					.text("Describe what changes you are making in the document. Then upload the new version (*This will include directions on what the file name should be*)."),
 				$("<textarea/>", {
 					rows: "6",
-					cols: "70"
+					cols: "70",
+					id: "upload-reason"
 				}),
 				$("<br/>"), $("<br/>"),
 				$("<p/>")
