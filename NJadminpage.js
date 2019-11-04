@@ -3,28 +3,11 @@
 var categories = ["volume", "chapter", "subchapter", "policy", "ik5sdyufng,jbg"];
 
 function get_file_tree() {
-	let policy_tree = {};
-	let err = false;
-
-	// this invokes the php script at includes/policy_tree which is just an invocation of the python script at py/walk_polices.py :)
-	$.ajax({
-		url: "./includes/policy_tree.php",
-		type: "post",
-		datatype: "json",
-		success: (data, textStatus, xhr) => {
-			policy_tree = data;
-			if (data.error !== 0) {
-				// theres got to be a better way
-				err = true;
-				alert("error: could not index policies\nERROR CODE " + Number(err));
-			}
-		}
+	let policy_tree = {}
+	$.getJSON("./res/dcf_policy_manual.json", (data) => {
+		policy_tree = data;
 	});
-	console.log(policy_tree);
-	if (!err) {
-		return policy_tree;
-	}
-	return false;
+	return policy_tree
 }
 
 function selected_option(self, section_type) {
