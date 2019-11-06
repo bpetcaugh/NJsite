@@ -30,7 +30,7 @@ function next_field_keys(current, tree) {
 
 function prepare_policy(self) {
 	if (self.parent().hasClass("policy-download")) {
-		let docpath = "/".join(["../res/policies", categories.slice(0, 4).each((ind, elem) => selected_option(self, elem))].flat());
+		let docpath = "/".join(["../res/policies", $.each(categories.slice(0, 4), (ind, elem) => selected_option(self, elem))].flat());
 		self.parent().children("form:has(button#policy-download-word)").attr("action", docpath);
 		self.parent().children("form:has(button#policy-download-word) > button#policy-download-word").removeClass("btn-secondary").addClass("btn-primary");
 
@@ -74,7 +74,7 @@ $(document).ready(() => {
 
 	$("div.policy-selection").each((ind, elem) => {
 		// populate volume dropdown if the div is empty (it probably will be)
-		if ($(this).contents().length == 0) {
+		if ($(this).children().length == 0) {
 			// using strings at html elements is an awful idea. rewrite to use objects later
 			let volume_select = $("<select/>", {
 				name: "volume",
@@ -82,16 +82,16 @@ $(document).ready(() => {
 			});
 
 			// sort the keys alphabetically so they are in volume order least -> greatest
-			let volumes = policy_tree.keys();
+			let volumes = Object.keys(policy_tree);
 
-			volumes.each((ind, elem) => {
+			$.each(volumes, (ind, elem) => {
 				volume_select.append($("<option/>", {
 					value: elem
 				}).text(elem));
 			});
 
 			let children = [volume_select, $("<br>")];
-			categories.slice(1, 4).each((ind, elem) => {
+			$.each(categories.slice(1, 4), (ind, elem) => {
 				children.push($("<select/>", {
 					name: elem,
 					class: "policy-control form-control"
@@ -100,7 +100,7 @@ $(document).ready(() => {
 			});
 
 			if ($(this).hasClass("policy-download")) {
-				["Word", "PDF"].each((ind, elem) => {
+				$.each(["Word", "PDF"], (ind, elem) => {
 					children.push($("<form/>", {
 						method: "get",
 						action: ""
@@ -132,7 +132,7 @@ $(document).ready(() => {
 					id: "policy-submit",
 					class: "btn btn-secondary",
 					value: "Update"
-				}).text("Update"))].map(children.push);
+				}).text("Update")].map(children.push);
 			}
 
 			// loops through the array and adds every element specified as a child of the div
@@ -144,7 +144,7 @@ $(document).ready(() => {
 $("select.policy-control").change(function() {
 	let self = $(this); // scary
 	// if there are no options in the element and it somehow fired a change event do nothing
-	if (self.contents().length == 0) return;
+	if (self.children().length == 0) return;
 
 	// update the tree
 	let policy_tree = get_file_tree();
@@ -159,10 +159,10 @@ $("select.policy-control").change(function() {
 	// when a field is changed all elements below said field are reset
 	// this fixes the problem when, if, for example, chapter is changed while policy is set, the policy and subchapter fields are not reset and an invalid path is created
 	if (!set.every((elem) => elem)) {
-		categories.slice(set.indexOf(false)+1, categories.length-1).each((ind, elem) => {
+		$.each(categories.slice(set.indexOf(false)+1, categories.length-1), (ind, elem) => {
 			selected_option(self, elem).html("");
 		});
-		["word", "pdf"].each((ind, elem) => {
+		$.each(["word", "pdf"], (ind, elem) => {
 			self.parent().children(`form:has(button#policy-download-${elem})`).attr("action", "");
 			self.parent().children(`form:has(button#policy-download-${elem}) > button#policy-download-${elem}`).removeClass("btn-primary").addClass("btn-secondary");
 		});
