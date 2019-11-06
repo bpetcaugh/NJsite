@@ -3,11 +3,11 @@ import shutil
 
 
 #Replace the file in the current policy folder
-os.replace("../temp/", policy folder)
+os.replace("../temp/"+fileName, policyFolder)
 
 #Copy,  rename and add it to the version Folder
-shutil.copyfile(policy folder, "../temp/")
-os.rename("../temp/", filename version number)
-shutil.move("../temp/" + filename version number, path to policy version folder)
+shutil.copyfile(policyFolder, "../temp/"+fileName)
+os.rename("../temp/"+fileName, "../temp/"+fileName+versionNumber)
+shutil.move("../temp/"+fileName+versionNumber, versionFolder)
 
-#("path/to/current/file.foo", "path/to/new/destination/for/file.foo")
+#syntax:: ("path/to/current/file.foo", "path/to/new/destination/for/file.foo")
