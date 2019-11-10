@@ -12,52 +12,6 @@ function get_file_tree() {
 	return policy_tree;
 }
 
-function selected_option(self, section_type) {
-	return self.parent().children(`select[name="${section_type}"] .policy-control > option:selected`);
-}
-
-function next_field_keys(current, tree) {
-	if (current.attr("name") == "policy") {
-		return [];
-	} else {
-		keys = [];
-		index_n_times = categories.indexOf(current.attr("name")) + 1;
-		c_tree = tree;
-		for (i = 0; i < index_n_times; i++) {
-			console.log(selected_option(current, categories[i]).attr("value"))
-			c_tree = c_tree[selected_option(current, categories[i]).val()];
-		}
-		return Object.keys(c_tree); // working on this error right now
-	}
-}
-
-function prepare_policy(self) {
-	if (self.parent().hasClass("policy-download")) {
-		let docpath = "/".join(["../res/policies", $.each(categories.slice(0, 4), (ind, elem) => selected_option(self, elem).val())].flat());
-		self.parent().children("form:has(button#policy-download-word)").attr("action", docpath);
-		self.parent().children("form:has(button#policy-download-word) > button#policy-download-word").removeClass("btn-secondary").addClass("btn-primary");
-
-		// conversions need to happen here. uncomment the lines below after the file conversion stuff has been implemented
-		let pdfpath = "";
-		// current.parent().children("form:has(button#policy-download-pdf)").attr("action", pdfpath);
-		// current.parent().children("form:has(button#policy-download-pdf) > button#policy-download-pdf").removeClass("btn-secondary").addClass("btn-primary");
-		return [];
-	} else if (self.parent().hasClass("policy-upload")) {
-		// IMPLEMENT UPLOADS AAA
-		policy_upload = new FormData();
-		policy_upload.append("to_upload", self.parent().children('input#policy-upload[type="file"]').prop("file"));
-		policy_upload.append("reason", self.parent().children("textarea#upload-reason").text());
-
-		$.ajax({
-			url: "./includes/upload.php",
-			dataType: "text",
-			data: policy_upload,
-			success: response => alert(response),
-			error: response => alert(response)
-		});
-	}
-}
-
 $(document).ready(() => {
     if($(window).height() <= 675) { // Toggle elements on mobile
         $('#sidebar').toggleClass('active');
@@ -107,10 +61,12 @@ $(document).ready(() => {
 					children.push($("<form/>", {
 						method: "get",
 						action: ""
-					}).append("<button></button>", {
-						class: "btn btn-secondary",
-						id: "policy-download-" + elem.toLowerCase()
-					}).text(`Download Document (${elem})`));
+					}).append(
+						$("<button/>", {
+							class: "btn",
+							id: "policy-download-" + elem.toLowerCase()
+						}).text(`Download Document (${elem})`)
+					));
 				});
 			} else if ($(elem).hasClass("policy-upload")) {
 				// i tried to make this legible
@@ -133,7 +89,7 @@ $(document).ready(() => {
 				$("<br/>"), $("<br/>"),
 				$("<input/>", {
 					id: "policy-submit",
-					class: "btn btn-secondary",
+					class: "btn",
 					value: "Update"
 				}).text("Update")], (e, i) => {
 					children.push(e);
@@ -147,55 +103,93 @@ $(document).ready(() => {
 		}
 	});
 
-	$("select.policy-control").change(function() {
-		console.log("policy option changed owo");
-		let self = $(this) // scary
-		// if there are no options in the element and it somehow fired a change event do nothing
-		if (self.children().length == 0) return;
+	$(`div.policy-download select.policy-control`).change(function() {
+		console.log($(this).attr("name"));
+		switch ($(this).attr("name")) {
+		case "volume":
+			let nextc = Object.keys(policy_tree[this.value]);
+			let next_elemc = $("<div/>");
+			$.each(nextc, (ind, elem) => {
+				next_elemc.append($("<option/>", {
+					value: elem
+				}).text(elem));
+			});
+			$(this).parent().find(`select[name="chapter"].policy-control`).html(next_elemc.html());
+		case "chapter":
+			let nexts = Object.keys(policy_tree[$(this).parent().find(`select[name="volume"]`)[0].value][$(this).parent().find(`select[name="chapter"].policy-control`)[0].value]);
+			let next_elems = $("<div/>");
+			$.each(nexts, (ind, elem) => {
+				next_elems.append($("<option/>", {
+					value: elem
+				}).text(elem));
+			});
+			$(this).parent().find(`select[name="subchapter"].policy-control`).html(next_elems.html());
+		case "subchapter":
+			let nextp = Object.keys(policy_tree[$(this).parent().find(`select[name="volume"]`)[0].value][$(this).parent().find(`select[name="chapter"]`)[0].value][$(this).parent().find(`select[name="subchapter"]`)[0].value]);
+			let next_elemp = $("<div/>");
+			$.each(nextp, (ind, elem) => {
+				next_elemp.append($("<option/>", {
+					value: elem
+				}).text(elem.substring(0, elem.lastIndexOf(" - "))));
+			});
+			$(this).parent().find(`select[name="policy"].policy-control`).html(next_elemp.html());
 
-		// update the tree
-		let policy_tree = get_file_tree();
-		if (!policy_tree) {
-			console.log("cant find file tree. ugxemricfssdaf");
-			return; // i made error checking look!!
+			// haha
+			$(`button#policy-download-word`).removeClass("btn-primary");
+			$(`button#policy-download-pdf`).removeClass("btn-primary");
+			let path = "./res/policies/" + policy_tree[$(this).parent().find(`select[name="volume"]`)[0].value][$(this).parent().find(`select[name="chapter"]`)[0].value][$(this).parent().find(`select[name="subchapter"]`)[0].value][$(this).parent().find(`select[name="policy"]`)[0].value];
+			$(`button#policy-download-word`).parent().attr("action", path.split(".pdf")[0] + ".docx");
+			$(`button#policy-download-pdf`).parent().attr("action", path);
+			$(`button#policy-download-word`).addClass("btn-primary");
+			$(`button#policy-download-pdf`).addClass("btn-primary");
 		}
+	});
 
-		let changed = self.attr("name");
-		let set = [];
-		self.parent().children('select.policy-control').each((e, i) => {
-			console.log($(this).is('select.policy-control:has(option:selected)'));
-			set.push($(this).is('select.policy-control:has(option:selected)') && !$(this).is(self));
-		});
-
-		// when a field is changed all elements below said field are reset
-		// this fixes the problem when, if, for example, chapter is changed while policy is set, the policy and subchapter fields are not reset and an invalid path is created
-		if (!set.every((elem) => elem)) {
-			console.log("169");
-			$.each(categories.slice(set.indexOf(false)+1, categories.length-1), (ind, elem) => {
-				selected_option(self, elem).html("");
+	$(`div.policy-upload select.policy-control`).change(function() {
+		console.log($(this).attr("name"));
+		switch ($(this).attr("name")) {
+		case "volume":
+			let nextc = Object.keys(policy_tree[this.value]);
+			let next_elemc = $("<div/>");
+			$.each(nextc, (ind, elem) => {
+				next_elemc.append($("<option/>", {
+					value: elem
+				}).text(elem));
 			});
-			$.each(["word", "pdf"], (ind, elem) => {
-				self.parent().children(`form:has(button#policy-download-${elem})`).attr("action", "");
-				self.parent().children(`form:has(button#policy-download-${elem}) > button#policy-download-${elem}`).removeClass("btn-primary").addClass("btn-secondary");
+			$(this).parent().find(`select[name="chapter"].policy-control`).html(next_elemc.html());
+		case "chapter":
+			let nexts = Object.keys(policy_tree[$(this).parent().find(`select[name="volume"]`)[0].value][$(this).parent().find(`select[name="chapter"].policy-control`)[0].value]);
+			let next_elems = $("<div/>");
+			$.each(nexts, (ind, elem) => {
+				next_elems.append($("<option/>", {
+					value: elem
+				}).text(elem));
 			});
-		}
-
-		// populate the options of the following select element now that specificity has increased by a degree
-		if (self.attr("name") != "policy") {
-			console.log("181");
-			// keys is going to be the list of names of possible options for the current select field
-			let keys = next_field_keys(self, policy_tree);
-
-			// i should not be let near functional programming
-			let options = $.map(keys, (e, i) => $("<option/>", {value: e}).text(e.split(" - ")));
-			console.log(options);
-			console.log(self.parent().children(`select[name="${categories[categories.indexOf(self.attr("name"))+1]}"].policy-control`).first());
-			$.map(options, (e, i) => {
-				console.log("e");
-				self.parent().children(`select[name="${categories[categories.indexOf(yea)+1]}"].policy-control`).first().append(e);
+			$(this).parent().find(`select[name="subchapter"].policy-control`).html(next_elems.html());
+		case "subchapter":
+			let nextp = Object.keys(policy_tree[$(this).parent().find(`select[name="volume"]`)[0].value][$(this).parent().find(`select[name="chapter"]`)[0].value][$(this).parent().find(`select[name="subchapter"]`)[0].value]);
+			let next_elemp = $("<div/>");
+			$.each(nextp, (ind, elem) => {
+				next_elemp.append($("<option/>", {
+					value: elem
+				}).text(elem.substring(0, elem.lastIndexOf(" - "))));
 			});
-		} else {
-			prepare_policy(self);
+			$(this).parent().find(`select[name="policy"].policy-control`).html(next_elemp.html());
+
+			policy_upload = new FormData();
+			policy_upload.append("to_upload", $(this).parent().children('input#policy-upload[type="file"]').prop("file"));
+			policy_upload.append("reason", $(this).parent().children("textarea#upload-reason").text());
+			policy_upload.append("newname", policy_tree[$(this).parent().find(`select[name="volume"]`)[0].value][$(this).parent().find(`select[name="chapter"]`)[0].value][$(this).parent().find(`select[name="subchapter"]`)[0].value][$(this).parent().find(`select[name="policy"]`)[0].value]);
+			console.log($(this).parent().children('input#policy-upload[type="file"]').prop("file"));
+			console.log($(this).parent().children("textarea#upload-reason").val());
+
+			$.ajax({
+				url: "./includes/upload.php",
+				dataType: "text",
+				data: policy_upload,
+				success: response => alert(response),
+				error: response => alert(response)
+			});
 		}
 	});
 });
