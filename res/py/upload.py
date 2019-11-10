@@ -28,6 +28,3 @@ os.rename("../temp/"+fileName, "../temp/"+fileName.split(".")[0]+versionNumber+"
 shutil.move("../temp/"+fileName.split(".")[0]+versionNumber+"."+fileName.split(".")[1], versionFolder)
 
 #syntax:: ("path/to/current/file.foo", "path/to/new/destination/for/file.foo")
-
-print(fileName)
-print(versionNumber)
