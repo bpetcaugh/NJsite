@@ -3,13 +3,16 @@ import shutil
 import sys
 import mysql.connector
 
+reasoning = "none specified"
+if (len(sys.argv) > 1):
+	reasoning = sys.argv[1]
+
 def dir(path):
     return list(os.walk(path))[0][2]
 
 #Define Variables
 
 fileName=([i for i in dir("../temp/") if i != "dummy.txt"])[0]
-
 policyFolder="../policies/"
 
 versionNumber=0
@@ -41,7 +44,7 @@ mydb = mysql.connector.connect(
 mycursor = mydb.cursor()
 
 sql = "INSERT INTO Policies (policy_name, version, reasoning) VALUES (%s, %s, %s)"
-val = (fielname-".pdf", versionNumber, placeholderReasoning)
+val = (fielname-".pdf", versionNumber, reasoning)
 mycursor.execute(sql, val)
 
 mydb.commit()

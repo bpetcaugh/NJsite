@@ -16,5 +16,5 @@
 	} else {
 	    // unknown error
 	}
-	$output = shell_exec('python3 ../res/py/upload.py');
+	$output = shell_exec('python3 ../res/py/upload.py ' . escapeshellarg($_POST["reason"]));
 ?>
