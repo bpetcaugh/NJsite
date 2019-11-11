@@ -35,8 +35,8 @@ shutil.move("../temp/"+fileName.split(".")[0]+versionNumber+"."+fileName.split("
 #Connect to the Databse
 mydb = mysql.connector.connect(
   host="localhost",
-  user="yourusername",
-  passwd="yourpassword"
+  user="njuser",
+  passwd="nj1234"
 )
 #Add data to the database
 mycursor = mydb.cursor()
