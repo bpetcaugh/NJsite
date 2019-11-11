@@ -1,5 +1,7 @@
 import os
 import shutil
+import sys
+import mysql.connector
 
 def dir(path):
     return list(os.walk(path))[0][2]
@@ -26,5 +28,20 @@ os.replace("../temp/"+fileName, policyFolder+fileName)
 shutil.copyfile(policyFolder+fileName, "../temp/"+fileName)
 os.rename("../temp/"+fileName, "../temp/"+fileName.split(".")[0]+versionNumber+"."+fileName.split(".")[1])
 shutil.move("../temp/"+fileName.split(".")[0]+versionNumber+"."+fileName.split(".")[1], versionFolder)
-
 #syntax:: ("path/to/current/file.foo", "path/to/new/destination/for/file.foo")
+
+#Connect to the Databse
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="yourusername",
+  passwd="yourpassword"
+)
+#Add data to the database
+
+mycursor = mydb.cursor()
+
+sql = "INSERT INTO Policies (policy_name, version, reasoning) VALUES (%s, %s, %s)"
+val = (fielname-".pdf", versionNumber, placeholderReasoning)
+mycursor.execute(sql, val)
+
+mydb.commit()
