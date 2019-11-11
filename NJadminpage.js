@@ -133,8 +133,7 @@ $(document).ready(() => {
 				}).text(elem.substring(0, elem.lastIndexOf(" - "))));
 			});
 			$(this).parent().find(`select[name="policy"].policy-control`).html(next_elemp.html());
-
-			// haha
+		case "policy":
 			$(`button#policy-download-word`).removeClass("btn-primary");
 			$(`button#policy-download-pdf`).removeClass("btn-primary");
 			let path = "./res/policies/" + policy_tree[$(this).parent().find(`select[name="volume"]`)[0].value][$(this).parent().find(`select[name="chapter"]`)[0].value][$(this).parent().find(`select[name="subchapter"]`)[0].value][$(this).parent().find(`select[name="policy"]`)[0].value];
@@ -175,8 +174,8 @@ $(document).ready(() => {
 				}).text(elem.substring(0, elem.lastIndexOf(" - "))));
 			});
 			$(this).parent().find(`select[name="policy"].policy-control`).html(next_elemp.html());
-
-			policy_upload = new FormData();
+		case "policy":
+			let policy_upload = new FormData();
 			policy_upload.append("to_upload", $(this).parent().children('input#policy-upload[type="file"]').prop("file"));
 			policy_upload.append("reason", $(this).parent().children("textarea#upload-reason").text());
 			policy_upload.append("newname", policy_tree[$(this).parent().find(`select[name="volume"]`)[0].value][$(this).parent().find(`select[name="chapter"]`)[0].value][$(this).parent().find(`select[name="subchapter"]`)[0].value][$(this).parent().find(`select[name="policy"]`)[0].value]);
