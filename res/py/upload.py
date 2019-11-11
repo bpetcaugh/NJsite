@@ -16,12 +16,11 @@ fileName=([i for i in dir("../temp/") if i != "dummy.txt"])[0]
 policyFolder="../policies/"
 
 versionNumber=0
-
 versionFolder="../oldversions/"
 for filename in os.listdir("../oldversions/"):
     if filename.endswith(".pdf") and filename.split("v")[0] == fileName.split("v")[0]:
         versionNumber+=1
-
+versionInteger=versionNumber
 versionNumber = "v"+str(versionNumber)
 
 #Replace the file in the current policy folder
@@ -43,7 +42,7 @@ mydb = mysql.connector.connect(
 mycursor = mydb.cursor()
 
 sql = "INSERT INTO Policies (policy_name, version, reasoning) VALUES (%s, %s, %s)"
-val = (filename.rsplit(".", 1)[0], versionNumber, Reasoning)
+val = (filename.rsplit(".", 1)[0], versionInteger, Reasoning)
 mycursor.execute(sql, val)
 
 mydb.commit()
