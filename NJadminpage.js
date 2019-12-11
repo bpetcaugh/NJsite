@@ -138,7 +138,7 @@ $(document).ready(() => {
 			$(`button#policy-download-pdf`).removeClass("btn-primary");
 			let path = "./res/policies/" + policy_tree[$(this).parent().find(`select[name="volume"]`)[0].value][$(this).parent().find(`select[name="chapter"]`)[0].value][$(this).parent().find(`select[name="subchapter"]`)[0].value][$(this).parent().find(`select[name="policy"]`)[0].value];
 			$(`button#policy-download-word`).parent().attr("action", path.split(".pdf")[0] + ".docx");
-			$(`button#policy-download-pdf`).parent().attr("action", path);
+			$(`button#policy-download-pdf`).parent().attr("action", path.split(".pdf")[0] + ".pdf");
 			$(`button#policy-download-word`).addClass("btn-primary");
 			$(`button#policy-download-pdf`).addClass("btn-primary");
 		}
