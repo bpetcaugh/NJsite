@@ -1,3 +1,21 @@
+
+$(document).ready(function () {
+    if($(window).height() <= 675) { // Toggle elements on mobile
+        $('#sidebar').toggleClass('active');
+        $('#sidebarCollapse').toggleClass('active');
+    }
+
+    $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+        $(this).toggleClass('active');
+        if($(window).height() <= 675) { // Toggle elements on mobile
+            $(".headerLogo").toggle();  
+        }
+    });
+});
+
+/*
+
 // this version has nothing regarding uploading files because im scared of people changing a div's class to policy-upload
 
 // unfortunately we cannot create a select tag with the name "ik5sdyufng,jbg" as a result of this hack
@@ -163,3 +181,4 @@ $("select.policy-control").change(function() {
 		prepare_policy(self);
 	}
 });
+*/

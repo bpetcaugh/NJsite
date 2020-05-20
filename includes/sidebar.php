@@ -2,15 +2,19 @@
 	<div class="sidebar-header">
 		<table>
 			<tr>
-				<td width="25%">
+				<td width="40%">
 					<!--<a href="NJadminpage.html"><img src="icon-login.png" width="45px"></a>
 -->
-					<button type="button" class=" btn btn-primary login mx-auto d-block" data-toggle="modal" data-target="#login"><img src="./res/icon-login.png" width="45px"></i>Login</button>
+					<img src="./res/dcf_logo_square.png" width="100%" alt="DCF">
+				</td>
+				<td width="60%" style="padding-left: 15px;">
+				    <!-- <img src="./res/icon-login.png" width="45px"> -->
+					<button type="button" class=" btn btn-primary login mx-auto d-block" data-toggle="modal" data-target="#login" style="position:relative; bottom: 30px; left:20%;">Login</button>
 					<!-- <i class="fa icon fa-sign-in fa-lg">-->
 				</td>
-				<td width="75%" style="padding-left: 15px;">
+				<!--<td width="75%" style="padding-left: 15px;">
 					<h4>Navigation</h4>
-				</td>
+				</td>-->
 			</tr>
 		</table>
 	</div>

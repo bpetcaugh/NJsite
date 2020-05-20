@@ -16,32 +16,6 @@
 
 	<?php include("./includes/header.php"); ?>
 
-	 <style>
-		.panel-heading .accordion-toggle:after {
-		    /* symbol for "opening" panels */
-		    font-family: 'Glyphicons Halflings';  /* essential for enabling glyphicon */
-		    content: "\e114";    /* adjust as needed, taken from bootstrap.css */
-		    float: right;        /* adjust as needed */
-		    color: grey;         /* adjust as needed */
-		}
-		.panel-heading .accordion-toggle.collapsed:after {
-		    /* symbol for "collapsed" panels */
-		    content: "\e080";    /* adjust as needed, taken from bootstrap.css */
-		}
-		.listcontainer {
-			width: 60%;
-			background-color: beige;
-		}
-
-		.panel-title {
-			background-color: gray;
-		}
-
-		.a {
-			text-decoration: underline;
-		}
-	 </style>
-
 </head>
 
 <body>
@@ -63,7 +37,7 @@
 						-->
 						</div>
                     </nav>
-					<img src="./res/NJ_DCF_Logo.png" alt="Holy Ghost Prep" style="width: 45%; height: 50%;" class="headerLogo">
+					<img src="./res/NJ_DCF_Logo.png" alt="NJ DCF" style="width: 45%; height: 50%;" class="headerLogo">
 				    <!--<h1 class="headerTitle">New Jersey</h1>-->
 				</div>
 			</div>
@@ -258,10 +232,12 @@ Department's current practices. <p>
                 </div>
             </div>
 			<?php //include("./includes/jslibraries.php"); ?>
+
 			<!-- javascript libraries -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="NJPage.js"></script>
 	<!--<script src="NJadminpage.js"></script>-->
 </body>
 </html>
