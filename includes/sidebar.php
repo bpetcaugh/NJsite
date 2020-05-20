@@ -3,10 +3,13 @@
 		<table>
 			<tr>
 				<td width="25%">
-					<a href="NJadminpage.html"><img src="icon-login.png" width="45px"></a>
+					<!--<a href="NJadminpage.html"><img src="icon-login.png" width="45px"></a>
+-->
+					<button type="button" class=" btn btn-primary login mx-auto d-block" data-toggle="modal" data-target="#login"><img src="./res/icon-login.png" width="45px"></i>Login</button>
+					<!-- <i class="fa icon fa-sign-in fa-lg">-->
 				</td>
 				<td width="75%" style="padding-left: 15px;">
-					<h3>Navigation</h3>
+					<h4>Navigation</h4>
 				</td>
 			</tr>
 		</table>

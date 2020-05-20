@@ -1,3 +1,5 @@
+<?php include("connect.php"); ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -45,9 +47,11 @@
 								<span></span>
 								<span></span>
 							</button>
+							<!--<i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+						-->
 						</div>
                     </nav>
-					<img src="seal-dcf.PNG" alt="Holy Ghost Prep" style="width: 45%; height: 50%;" class="headerLogo">
+					<img src="NJ_DCF_Logo.png" alt="Holy Ghost Prep" style="width: 45%; height: 50%;" class="headerLogo">
 				    <!--<h1 class="headerTitle">New Jersey</h1>-->
 				</div>
 			</div>
@@ -98,11 +102,52 @@
 				<h2>List of Policies</h2>
 				<p>Below is a comprehensive list of all policies:</p>
 				<h3>Download Document Version</h3>
-	            <div class="form-group policy-selection policy-download"></div>
+	            <div class="form-group policy-selection policy-download">
+
+				
+				
+				
+				
+				</div>
 			</div>
 		</div>
 	</div>
-	<?php include("./includes/jslibraries.php"); ?>
-	<script src="NJPage.js"></script>
+
+
+			<!-- Login modal -->
+            <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Admin Login</h5>
+                            <button type="btn" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="panel mx-auto">
+                                <h2 class="text-center">Login</h2>
+                                <p class="text-center">Please enter your login credentials</p><hr>
+                                <form method="post" action="loginAuth.php">
+                                    <div class="form-group">
+                                        <input type="text" name="username" class="form-control" placeholder="Username" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" name="password" class="form-control" placeholder="Password" required>
+                                        <input type="hidden" name="token" value="<?php echo $_SESSION['token']; ?>" />
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Login</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			<?php //include("./includes/jslibraries.php"); ?>
+			<!-- javascript libraries -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	<script src="NJadminpage.js"></script>
 </body>
 </html>
