@@ -8,6 +8,7 @@
 
 <!-- Our CSS -->
 <link rel="stylesheet" type="text/css" href="NJPage.css">
+<link rel="icon" href="./res/favicon.png">
 
 <style>
 		.panel-heading .accordion-toggle:after {

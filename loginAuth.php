@@ -26,7 +26,7 @@
         if ($row["password"] == $mypassword) {
             $_SESSION["id"] = $row["id"];
             if ($row['accessLevel'] == 'root') {
-                header("location: NJadminpage.php");
+                header("location: admindash.php");
             } else {
                 header("location: NJstandardpage.php");
             }

@@ -165,6 +165,6 @@
 		</div>
     </div>
 	<?php include("./includes/jslibraries.php"); ?>
-	<!--<script src="NJadminpage.js"></script>-->
+
 </body>
 </html>

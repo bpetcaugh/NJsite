@@ -38,7 +38,7 @@
 						</div>
                     </nav>
 					<img src="./res/NJ_DCF_Logo.png" alt="NJ DCF" style="width: 45%; height: 50%;" class="headerLogo">
-				    <!--<h1 class="headerTitle">New Jersey</h1>-->
+
 				</div>
 			</div>
 			<div class="body-wrapper">
@@ -91,35 +91,20 @@ Main Number:  609-888-7030<br>
 Policy Mailbox:  <a href="mailto:Policy@dcf.nj.gov?subject=DCF%20Policy&body=My%20Inquiry:" style="text-decoration: underline;">Policy@dcf.nj.gov</a> <br></b>
 
 </p>
+<!--
+        <h4>Search Policies</h4>
+        <p>Select below if you would like to search for a policy by category, or by keyword.</p>
 
+        <a class="btn btn-primary btn-lg" href="searchcategory.php">Category</a>
+        <a class="btn btn-primary btn-lg" href="searchkeyword.php">Keyword</a>
+-->
+<!--
 				<h4>List of Policies</h4>
 				<p>Below is a comprehensive list of all policies:</p>
 				<h4>Download Document Version</h4>
-<!-- DROPDOWNS HERE-->
-<!-- <div class="form-group policy-selection policy-download"></div> -->
+        -->
 
-<?php
-// Get the contents of the JSON file 
-//$strJsonFileContents = file_get_contents("./res/dcf_policy_manual_sample.json");
-// Convert to array 
-//$array = json_decode($strJsonFileContents, true);
-//echo $array[0]["heading"]; // print array
-
-
-/*
-    $items = json_decode('[{"location":[{"building":   ["Building1"],"name":"Location1"}],"name":"Organization1"},{"location":[{"building":["Building2"],"name":"location2"}],"name":"Organisation2"},{"location":[{"building":["Building3"],"name":"Location3"}],"name":"Organization3"}]');
-    echo '<select name="category_id"><option value=""></option>';
-    $stepper = 0;
-    foreach($items as $each) {
-        $building = $each->location[0]->building[0];
-        $name = $each->location[0]->name;
-        $final_name = $each->name;
-        echo '<option value="'.$stepper.'">'.$final_name.'</option>';
-        $stepper++;
-    }
-    echo '</select>';*/
-?>
-
+<!--
 <form method="get" action="getpolicy.php">
   <div class="form-group">
     <label for="cat">Category</label>
@@ -158,7 +143,7 @@ Policy Mailbox:  <a href="mailto:Policy@dcf.nj.gov?subject=DCF%20Policy&body=My%
   </div>
 
   <button type="submit" class="btn btn-primary">Download PDF</button>
-</form>
+</form>-->
 
 <!-- SAMPLE FORM FOR EMAIL <form>
   <div class="form-group">
