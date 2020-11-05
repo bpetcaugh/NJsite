@@ -47,16 +47,19 @@
 			</div>
 			<div class="body-wrapper">
 				<!-- Your code goes here -->
-                <h1>DCF Policy Manuals - ADMINISTRATOR </h1>
-				<!--
-                <p>This is the adminstration side of the website. You are able to view old versions of documents,
-                    and/or make changes to existing documents. Choose a document below. </p>
--->
+				<?php 
+				if ($_SESSION["setAccessLevel"]) {
+					echo "<h1>DCF Policy Manuals - ADMINISTRATOR </h1>";
+				} else {
+					echo "<h1>DCF Policy Manuals - STANDARD USER </h1>";
+				}
+				?>
+
 				<p>Please watch the following video for a brief tour of all current site features:
 				</p>
 				<div style="">
 					<video width="600" controls>
-						<source src="./res/dcf_logintest.mp4" type="video/mp4">
+						<source src="./res/dcf_logintest2.mp4" type="video/mp4">
 						Your browser does not support the video tag.
 					</video>
 				</div>

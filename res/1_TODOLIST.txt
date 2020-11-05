@@ -1,0 +1,18 @@
+Password Change
+Update/Approve Policy
+Search Keywords
+
+Email Change to department
+Delete Policy
+List user changes to print
+List changes from past month to print
+List all policies
+
+Useful Sites for Files
+https://www.geeksforgeeks.org/php-file_exists-function/ 
+
+https://www.w3schools.com/php/php_file_upload.asp
+
+https://stackoverflow.com/questions/18216930/how-to-create-folder-with-php-code/18217147
+
+https://stackoverflow.com/questions/7800492/setting-up-a-ubuntu-apache-php-machine-to-send-email/7800583

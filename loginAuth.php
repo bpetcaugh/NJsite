@@ -26,9 +26,11 @@
         if ($row["password"] == $mypassword) {
             $_SESSION["id"] = $row["id"];
             if ($row['accessLevel'] == 'root') {
+                $_SESSION["setAccessLevel"] = true;
                 header("location: admindash.php");
             } else {
-                header("location: NJstandardpage.php");
+                $_SESSION["setAccessLevel"] = false;
+                header("location: standarddash.php");
             }
         }else{
             setAlert("danger", "Login failed. Please try again.");

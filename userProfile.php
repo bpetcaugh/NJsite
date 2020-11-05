@@ -98,7 +98,7 @@
                         echo "<p><b>Access Level:</b> " . $row["accessLevel"] . "</p>";
 
                         echo "<div class='btn-group'>
-                            <a class='btn btn-primary' href='userEdit.php?id=" . $_SESSION["id"] . "'>Edit Information</a>
+                            <a class='btn btn-primary' href='userEdit.php?id=" . $_SESSION["id"] . "&page=profile'>Edit Information</a>
 
                             <a class='btn btn-danger' href='userChangePW.php?id=" . $_SESSION["id"] . "'>Change Password</a>
                     </div>";

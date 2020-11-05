@@ -1,6 +1,68 @@
 <?php include("connect.php"); ?>
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+/* Exception class. */
+require './PHPMailer/Exception.php';
+
+/* The main PHPMailer class. */
+require './PHPMailer/PHPMailer.php';
+
+/* SMTP class, needed if you want to use SMTP. */
+require './PHPMailer/SMTP.php';
+
+/* Create a new PHPMailer object. Passing TRUE to the constructor enables exceptions. */
+$mail = new PHPMailer(TRUE);
+
+/* Open the try/catch block. */
+try {
+    /* Use SMTP. */
+$mail->isSMTP();
+
+/* Google (Gmail) SMTP server. */
+$mail->Host = 'smtp.gmail.com';
+
+/* SMTP port. */
+$mail->Port = 587;
+
+/* Set authentication. */
+$mail->SMTPAuth = true;
+$mail->SMTPSecure = 'tls';
+
+/* Username (email address). */
+$mail->Username = 'njdcf.website@gmail.com';
+
+/* Google account password. */
+$mail->Password = 'nj*dcf^8462';
+
+   /* Set the mail sender. */
+   $mail->setFrom('njdcf.website@gmail.com', 'B P');
+
+   /* Add a recipient. */
+   $mail->addAddress('bpetcaugh@gmail.com', 'Me');
+
+   /* Set the subject. */
+   $mail->Subject = 'Time to Party';
+
+   /* Set the mail message body. */
+   $mail->Body = 'There is a great disturbance in the Force.';
+
+   /* Finally send the mail. */
+   $mail->send();
+}
+catch (Exception $e)
+{
+   /* PHPMailer exception. */
+   echo $e->errorMessage();
+}
+catch (\Exception $e)
+{
+   /* PHP exception (note the backslash to select the global namespace Exception class). */
+   echo $e->getMessage();
+}
+
 // if(isset($_GET['policy_name']) )
 // {
 //   $n = $_GET['policy_name'];
@@ -71,7 +133,75 @@
 				<!-- Your code goes here -->
 				<h1>Contact Form</h1>
 
-                <form method="post" action="emailsend.php">
+        <form  method="post" action="emailsend.php">
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="inputEmail">Email</label>
+      <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+    </div>
+
+    <div class="form-group col-md-4">
+      <label for="inputName">Name</label>
+      <input type="text" class="form-control" id="inputName" placeholder="Name">
+    </div>
+
+    <div class="form-group col-md-4">
+      <label for="inputContactNumber">Contact Number</label>
+      <input type="text" class="form-control" id="inputContactNumber" placeholder="">
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputTitle">Working Title</label>
+      <input type="text" class="form-control" id="inputTitle" placeholder="Title">
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="inputLocation">Job Location</label>
+      <input type="text" class="form-control" id="inputLocation" placeholder="Location">
+    </div>
+  </div>
+<!--
+  <div class="form-group">
+    <label for="inputAddress">Address</label>
+    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+  </div>
+  <div class="form-group">
+    <label for="inputAddress2">Address 2</label>
+    <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputCity">City</label>
+      <input type="text" class="form-control" id="inputCity">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputState">State</label>
+      <select id="inputState" class="form-control">
+        <option selected>Choose...</option>
+        <option>...</option>
+      </select>
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputZip">Zip</label>
+      <input type="text" class="form-control" id="inputZip">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="gridCheck">
+      <label class="form-check-label" for="gridCheck">
+        Check me out
+      </label>
+    </div>
+  </div>-->
+  <button type="submit" class="btn btn-primary">Send</button>
+</form>
+
+<!-- ********************************************************************** -->
+
+<form method="post" action="emailsend.php">
   <div class="form-group">
     <label for="exampleFormControlInput1">Email address</label>
     <input style="width:30%;" name="email" type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
@@ -101,7 +231,7 @@
     <textarea style="width:30%;" name="policyName" class="form-control" id="exampleFormControlTextarea2" rows="1"></textarea>
   </div>
   <div class="form-group">
-    <label for="exampleFormControlTextarea3">Policy Name</label>
+    <label for="exampleFormControlTextarea3">Reason For Email</label>
     <textarea name="reason" class="form-control" id="exampleFormControlTextarea3" rows="4"></textarea>
   </div>
   <button type="submit" class="btn btn-primary">Send</button>

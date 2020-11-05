@@ -1,12 +1,6 @@
 <?php include("connect.php"); ?>
 <?php
 
-// if(isset($_GET['policy_name']) )
-// {
-//   $n = $_GET['policy_name'];
-// 	echo $n;
-// }
-
 if(isset($_POST['sports'])) {
     foreach($_POST['cats'] as $value){
         echo "Categories: " .  $value;
@@ -45,7 +39,6 @@ if(isset($_POST['sports'])) {
 						</div>
                     </nav>
 					<img src="./res/NJ_DCF_Logo.png" alt="NJ DCF" style="width: 45%; height: 50%;" class="headerLogo">
-				    <!--<h1 class="headerTitle">New Jersey</h1>-->
 				</div>
 			</div>
 			<div class="body-wrapper">
@@ -62,19 +55,25 @@ if(isset($_POST['sports'])) {
                         <p>Check the categories you would like to search through.</p>
                         
                         <p>
-                            <label><input type="checkbox" name="cats[]" value="cycling" /> cycling</label><br>
-                            <label><input type="checkbox" name="cats[]" value="running" /> running</label><br>
-                            <label><input type="checkbox" name="cats[]" value="visit gym" /> visit gym</label><br>
-                            <label><input type="checkbox" name="cats[]" value="swimming" /> swimming</label><br>
-                            <label><input type="checkbox" name="cats[]" value="team sports" /> team sport(s)</label><br>
-                            <label><input type="checkbox" name="cats[]" value="other" /> other</label>
+                            <?php
+
+                                $sql = "SELECT DISTINCT category FROM policies ORDER BY category ASC;";      
+                                $result = mysqli_query($conn, $sql);
+
+                                if (mysqli_num_rows($result) > 0) {
+                                    // output data of each row
+                                    while($row = mysqli_fetch_assoc($result)) {
+                                            echo '<label><input type="checkbox" name="cats[]" value="' . $row['category'] . '" />' . "  ". $row['category'] . '</label><br>';                                
+                                    }
+                                }
+
+                            ?>
                         </p>
                         
                     </fieldset>
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <a class="btn btn-primary" style="color:#fff;" onclick="goBack()">Cancel</a>
                 </form>
-
 
                 <br><br>
 
@@ -85,7 +84,7 @@ if(isset($_POST['sports'])) {
                    OR column1 LIKE '%word3%'";
 
                 ?>
-
+<!--
                 <div class="card">
                     <div class="card-header">
                         Featured
@@ -95,7 +94,7 @@ if(isset($_POST['sports'])) {
                         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                         <a href="#" class="btn btn-primary">Download PDF</a>
                     </div>
-                </div>
+                </div>-->
 				
 			</div>
 		</div>

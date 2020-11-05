@@ -21,8 +21,25 @@
         <li>
 			<a href="userProfile.php">My Profile</a>
 		</li>
-		<li>
+		<?php
+		if ($_SESSION["setAccessLevel"]) {
+			echo '		<li>
 			<a href="userList.php">User Information</a>
+		</li>';
+		} ?>
+
+		<li>
+			<a href="filesMissing.php">Missing Files</a>
 		</li>
+		<li>
+			<a href="filesListAll.php">List All Policies</a>
+		</li>
+		<?php
+		if ($_SESSION["setAccessLevel"]) {
+			echo '		<li>
+			<a href="pendingUpdates.php">Pending Updates</a>
+		</li>';
+		} ?>
+
 	</ul>
 </nav>
