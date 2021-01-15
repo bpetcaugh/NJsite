@@ -1,32 +1,21 @@
-# NJsite
-TODO: 12/16
-New text for front page, (DONE)
-new logo (DONE)
-suggestions email page
-deal with free-standing documents
-Add placeholder labels to main dropdowns
-Add search for keyword
-limit search to different categories
-Create report for changes in last month, printable
-Change existing description, with new date with change
+# NJ DCF Website Repo
+## Introduction
+This website is being built by students at Holy Ghost Preparatory School, with oversight by their instructor (Mr. Brandon Petcaugh). It will serve to replace the existing site housing all files/policies/regulations for the NJ Department of Children and Families. [Link To Existing Site](https://www.nj.gov/dcf/policy_manuals/toc.shtml) 
 
+## Public Website Functionality
+This site will be used by the public to search and download policies. It also contains an email template which can be used to contact the department with any requests.
 
-#Current Questions
-.EML files are only used with Microsoft Outlook. Can we convert that to a general
-form for all computers to use, even though the formatting would look different? This
-Will this be something that is printed for the department, or is that information filled 
-in somewhere else? How is it filed? ...Would you be against taking the user to a separate
-contact us FORM, where the user fills in information like what would be in the .EML file?
+## Department Website Funcationality
+This site will be used for three primary functions:
+1. Add new policies and regulations
+2. Mark policies as obsolete
+3. Modify existing policies
 
+Diagrams for the workflow of these functions will be placed here.
 
+## General Information
+### Who uses this site?
+This site would be used internally by 46 local offices, with approximately 6600 staff, and 12 area offices.
 
-#Email them:
-Old excel file (DONE)
-FTP credentials
-
-#General info:
-Who uses this site?
-46 local offices, 
-all staffed, 6600 staff,
-12 area offices
-
+## Current Production ToDo List
+This will be updated accordingly.

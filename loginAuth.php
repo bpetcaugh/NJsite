@@ -23,7 +23,7 @@
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($result);
 
-        if ($row["password"] == $mypassword) {
+        if (isPasswordCorrect($row['username'], $mypassword)) {
             $_SESSION["id"] = $row["id"];
             if ($row['accessLevel'] == 'root') {
                 $_SESSION["setAccessLevel"] = true;
@@ -33,11 +33,13 @@
                 header("location: standarddash.php");
             }
         }else{
-            setAlert("danger", "Login failed. Please try again.");
+            setAlert("danger", "Login failed. Please try again."); 
+            //header('Location: '.$_SERVER['REQUEST_URI']);
             header("location: index.php");
         }
     }else{
         setAlert("danger", "Error. Please try logging in again.");
+        //header('Location: '.$_SERVER['REQUEST_URI']);
         header("location: index.php");
     }
     

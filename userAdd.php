@@ -1,4 +1,18 @@
-<?php include("connect.php"); ?>
+<?php include("connect.php"); 
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+/* Exception class. */
+require './PHPMailer/Exception.php';
+
+/* The main PHPMailer class. */
+require './PHPMailer/PHPMailer.php';
+
+/* SMTP class, needed if you want to use SMTP. */
+require './PHPMailer/SMTP.php';
+
+?>
 <?php
     require("./functions.php");
 	checkSession();
@@ -20,6 +34,8 @@
         $al = $_POST['accessLevel'];
         $p = $_POST['password'];
 
+
+
         $sql = "INSERT INTO users (username, password, firstname, lastname, email, office, costcode, accessLevel)
         VALUES ('{$un}', '{$p}','{$fn}', '{$ln}', '{$e}', '{$o}', '{$cc}', '{$al}')";
 
@@ -27,6 +43,86 @@
 
         if (mysqli_query($conn, $sql)) {
             echo "New record created successfully";
+
+            setPassword($un,$p);
+
+            //Send email
+            
+
+            //Email Status to display on site.
+            $email_final_status = "Information submitted successfully.";
+
+            //Variables from User Creation
+            $email_input = $e;
+            $name_input = $fn . " " . $ln;
+
+            $email_body_full = "<html>
+            
+            <p>An account was created for you on the NJ DCF Policy website.</p>
+            <p>Please log in with the credentials below. You will be prompted to reset your password to something more secure.</p>
+
+            <p>Website URL: <a href='http://cs.holyghostprep.org/njdcf/'>http://cs.holyghostprep.org/njdcf/</a></p>
+            <p><b>Username:</b> " . $un . "</p>
+            <p><b>Password:</b> " . $p . "</p>
+
+            </html>
+            ";
+
+            /* Create a new PHPMailer object. Passing TRUE to the constructor enables exceptions. */
+            $mail = new PHPMailer(TRUE);
+
+            /* Open the try/catch block. */
+            try {
+                /* Use SMTP. */
+            $mail->isSMTP();
+            $mail->isHTML(TRUE);
+
+            /* Google (Gmail) SMTP server. */
+            $mail->Host = 'smtp.gmail.com';
+
+            /* SMTP port. */
+            $mail->Port = 587;
+
+            /* Set authentication. */
+            $mail->SMTPAuth = true;
+            $mail->SMTPSecure = 'tls';
+
+            /* Username (email address). */
+            $mail->Username = 'njdcf.website@gmail.com';
+
+            /* Google account password. */
+            $mail->Password = 'nj*dcf^8462';
+
+            /* Set the mail sender. */
+            $mail->setFrom('njdcf.website@gmail.com', $name_input);
+
+            /* Add a recipient. (Who will the email be sent to?) */
+            //$mail->addAddress('policy@dcf.nj.gov', 'NJ DCF');
+            $mail->addAddress($email_input, $name_input);
+
+            /* Set the subject. */
+            $request_subject = 'Account Created on NJ DCF Website';
+            $mail->Subject = $request_subject;
+
+            /* Set the mail message body. */
+            $mail->Body = $email_body_full;
+
+            /* Finally send the mail. */
+            $mail->send();
+            }
+            catch (Exception $e)
+            {
+            /* PHPMailer exception. */
+            $e->errorMessage();
+            $email_final_status = "<b>Error sending form:</b> " . $e;
+            }
+            catch (\Exception $e)
+            {
+            /* PHP exception (note the backslash to select the global namespace Exception class). */
+            $e->getMessage();
+            $email_final_status = "<b>Error sending form:</b> " . $e;
+            }
+
             header('Location: userList.php');
         } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);

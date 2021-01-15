@@ -80,7 +80,7 @@
                     <tbody>
                 <?php
 
-                    $sql = "SELECT * FROM users";
+                    $sql = "SELECT * FROM users WHERE deleted=0";
                     $result = mysqli_query($conn, $sql);
 
                     if (mysqli_num_rows($result) > 0) {

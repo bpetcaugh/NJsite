@@ -21,25 +21,52 @@
         <li>
 			<a href="userProfile.php">My Profile</a>
 		</li>
+
+		<li>
+			<a href="tutorials.php">Tutorials</a>
+		</li>
+
+		<li>
+			<a href="filesMissing.php">Missing Files</a>
+		</li>
+
+		<li>
+			<a href="filesListAll.php">List All Policies</a>
+		</li>
+
+		<hr style="width:90%; border:1px solid #00c8ff;" >
+
+		<li>
+			<a href="policyDelete.php">Policy Obsolete</a>
+		</li>
+		<li>
+			<a href="policyUpdate.php">Policy Modify</a>
+		</li>
+		<li>
+			<a href="policyAdd.php">Policy Add</a>
+		</li>
+
 		<?php
 		if ($_SESSION["setAccessLevel"]) {
+			echo '		<hr style="width:90%; border:1px solid #00c8ff;" >';
 			echo '		<li>
 			<a href="userList.php">User Information</a>
 		</li>';
 		} ?>
 
-		<li>
-			<a href="filesMissing.php">Missing Files</a>
-		</li>
-		<li>
-			<a href="filesListAll.php">List All Policies</a>
-		</li>
 		<?php
 		if ($_SESSION["setAccessLevel"]) {
 			echo '		<li>
 			<a href="pendingUpdates.php">Pending Updates</a>
 		</li>';
 		} ?>
+		<?php
+		if ($_SESSION["setAccessLevel"]) {
+			echo '		<li>
+			<a href="logUpdates.php">Log Updates</a>
+		</li>';
+		} ?>
+
 
 	</ul>
 </nav>

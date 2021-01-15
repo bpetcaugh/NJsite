@@ -1,75 +1,5 @@
 <?php include("connect.php"); ?>
-<?php
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-/* Exception class. */
-require './PHPMailer/Exception.php';
-
-/* The main PHPMailer class. */
-require './PHPMailer/PHPMailer.php';
-
-/* SMTP class, needed if you want to use SMTP. */
-require './PHPMailer/SMTP.php';
-
-/* Create a new PHPMailer object. Passing TRUE to the constructor enables exceptions. */
-$mail = new PHPMailer(TRUE);
-
-/* Open the try/catch block. */
-try {
-    /* Use SMTP. */
-$mail->isSMTP();
-
-/* Google (Gmail) SMTP server. */
-$mail->Host = 'smtp.gmail.com';
-
-/* SMTP port. */
-$mail->Port = 587;
-
-/* Set authentication. */
-$mail->SMTPAuth = true;
-$mail->SMTPSecure = 'tls';
-
-/* Username (email address). */
-$mail->Username = 'njdcf.website@gmail.com';
-
-/* Google account password. */
-$mail->Password = 'nj*dcf^8462';
-
-   /* Set the mail sender. */
-   $mail->setFrom('njdcf.website@gmail.com', 'B P');
-
-   /* Add a recipient. */
-   $mail->addAddress('bpetcaugh@gmail.com', 'Me');
-
-   /* Set the subject. */
-   $mail->Subject = 'Time to Party';
-
-   /* Set the mail message body. */
-   $mail->Body = 'There is a great disturbance in the Force.';
-
-   /* Finally send the mail. */
-   $mail->send();
-}
-catch (Exception $e)
-{
-   /* PHPMailer exception. */
-   echo $e->errorMessage();
-}
-catch (\Exception $e)
-{
-   /* PHP exception (note the backslash to select the global namespace Exception class). */
-   echo $e->getMessage();
-}
-
-// if(isset($_GET['policy_name']) )
-// {
-//   $n = $_GET['policy_name'];
-// 	echo $n;
-// }
-
-?>
 <!DOCTYPE html>
 <html>
 
@@ -130,112 +60,147 @@ catch (\Exception $e)
 				</div>
 			</div>
 			<div class="body-wrapper">
-				<!-- Your code goes here -->
-				<h1>Contact Form</h1>
-
-        <form  method="post" action="emailsend.php">
+        <!-- Your code goes here -->
+        <?php require("functions.php"); showAlert(); ?>
+        <h1>Contact Form</h1>
+        <p>Fill out all necessary information in the boxes provided, and submit the form below.</p>
+        <br />
+<!--class="needs-validation" novalidate-->
+        <form  class="needs-validation" method="post" action="emailsend.php" novalidate>
+          <h2>Personal Information</h2>
+          <!-- ROW 1 -->
   <div class="form-row">
     <div class="form-group col-md-4">
       <label for="inputEmail">Email</label>
-      <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+      <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="Email" required>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+      <div class="invalid-feedback">
+          Valid email address required.
+      </div>
     </div>
 
     <div class="form-group col-md-4">
       <label for="inputName">Name</label>
-      <input type="text" class="form-control" id="inputName" placeholder="Name">
+      <input type="text" class="form-control" id="inputName" name="inputName" placeholder="Name" required>
+      <div class="valid-feedback"></div>
+      <div class="invalid-feedback">
+          Name required.
+      </div>
     </div>
 
     <div class="form-group col-md-4">
       <label for="inputContactNumber">Contact Number</label>
-      <input type="text" class="form-control" id="inputContactNumber" placeholder="">
+      <input type="text" class="form-control" id="inputContactNumber" name="inputContactNumber" placeholder="(XXX) XXX-XXXX" required>
+      <div class="invalid-feedback">
+          Contact Number required.
+      </div>
     </div>
   </div>
 
+  <!-- ROW 2 -->
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputTitle">Working Title</label>
-      <input type="text" class="form-control" id="inputTitle" placeholder="Title">
+      <input type="text" class="form-control" id="inputTitle" name="inputTitle" placeholder="Title" required>
+      <div class="invalid-feedback">
+          Job title required.
+      </div>
     </div>
 
     <div class="form-group col-md-6">
       <label for="inputLocation">Job Location</label>
-      <input type="text" class="form-control" id="inputLocation" placeholder="Location">
+      <input type="text" class="form-control" id="inputLocation" name="inputLocation" placeholder="Location" required>
+      <div class="invalid-feedback">
+          Location required.
+      </div>
     </div>
   </div>
-<!--
+
+  <h2>Inquiry Information</h2>
+
+  <!-- Inquiry Type Group -->
+  <div class="form-group col-md-3">
+  <p>Inquiry Type:</p>
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name="inquiryRadios" id="inquiryRadios1" value="Policy" required>
+    <label class="form-check-label" for="inquiryRadios1">
+      Policy
+    </label>
+  </div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="inquiryRadios" id="inquiryRadios2" value="Regulation">
+  <label class="form-check-label" for="inquiryRadios2">
+    Regulation
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="inquiryRadios" id="inquiryRadios3" value="Form">
+  <label class="form-check-label" for="inquiryRadios3">
+    Form
+  </label>
+</div>
+  </div>
+
+<!-- Policy Type Group -->
+<div class="form-group col-md-3">
+<p>Policy Creating, Revising, Obsoleting Request:</p>
+  <div class="form-check">
+  <input class="form-check-input" type="radio" name="policyRadios" id="policyRadios1" value="Create New Policy or Form" required>
+  <label class="form-check-label" for="policyRadios1">
+    Create New
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="policyRadios" id="policyRadios2" value="Revise Current Policy or Form">
+  <label class="form-check-label" for="policyRadios2">
+    Revise Current
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="policyRadios" id="policyRadios3" value="Obsolete Policy or Form">
+  <label class="form-check-label" for="policyRadios3">
+    Mark Obsolete
+  </label>
+</div>
+  </div>
+
+<!-- Final Form Rows-->
+<div class="form-group">
+    <label for="policyCite">Policy/Form/Regulation Citation or Title</label>
+    <textarea style="width:30%;" name="policyCite" class="form-control" id="policyCite" rows="1" required></textarea>
+  </div>
+
   <div class="form-group">
-    <label for="inputAddress">Address</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+    <label for="suggestionsComments">Reason For Inquiry</label>
+    <textarea name="comments" class="form-control" id="suggestionsComments" rows="4" required></textarea>
   </div>
-  <div class="form-group">
-    <label for="inputAddress2">Address 2</label>
-    <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-  </div>
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="inputCity">City</label>
-      <input type="text" class="form-control" id="inputCity">
-    </div>
-    <div class="form-group col-md-4">
-      <label for="inputState">State</label>
-      <select id="inputState" class="form-control">
-        <option selected>Choose...</option>
-        <option>...</option>
-      </select>
-    </div>
-    <div class="form-group col-md-2">
-      <label for="inputZip">Zip</label>
-      <input type="text" class="form-control" id="inputZip">
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="gridCheck">
-      <label class="form-check-label" for="gridCheck">
-        Check me out
-      </label>
-    </div>
-  </div>-->
-  <button type="submit" class="btn btn-primary">Send</button>
+
+
+  <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
-<!-- ********************************************************************** -->
-
-<form method="post" action="emailsend.php">
-  <div class="form-group">
-    <label for="exampleFormControlInput1">Email address</label>
-    <input style="width:30%;" name="email" type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-  </div>
-  <div class="form-group">
-    <label for="exampleFormControlTextarea1">Your Name</label>
-    <textarea style="width:30%;" name="personName" class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
-  </div>
-  <div class="form-group" style="width:30%;">
-    <label for="exampleFormControlSelect1">Inquiry Type</label>
-    <select name="inquiryType" class="form-control" id="exampleFormControlSelect1">
-      <option value="Policy">Policy</option>
-      <option value="Regulation">Regulation</option>
-      <option value="Form">Form</option>
-    </select>
-  </div>
-  <div class="form-group" style="width:30%;">
-    <label for="exampleFormControlSelect2">Policy Creating, Revising, Obsoleting Request</label>
-    <select name="requestType" class="form-control" id="exampleFormControlSelect2">
-      <option value="CreateNew">Create New Policy or Form</option>
-      <option value="Revise">Revise Policy or Form</option>
-      <option value="Obsolete">Obsolete Policy or Form</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="exampleFormControlTextarea2">Policy Name</label>
-    <textarea style="width:30%;" name="policyName" class="form-control" id="exampleFormControlTextarea2" rows="1"></textarea>
-  </div>
-  <div class="form-group">
-    <label for="exampleFormControlTextarea3">Reason For Email</label>
-    <textarea name="reason" class="form-control" id="exampleFormControlTextarea3" rows="4"></textarea>
-  </div>
-  <button type="submit" class="btn btn-primary">Send</button>
-</form>
+<script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+</script>
 				
 				</div>
 			</div>

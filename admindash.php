@@ -55,14 +55,17 @@
 				}
 				?>
 
-				<p>Please watch the following video for a brief tour of all current site features:
+				<br /><br />
+				<p>Welcome to the DCF Policy user dashboard.</p>
+				<br />
+				<h3>Site Modifications or Comments</h3>
+				<p>This is a work-in-progress, so if you find anything that should be changed or modified, please contact the parties below:
 				</p>
-				<div style="">
-					<video width="600" controls>
-						<source src="./res/dcf_logintest2.mp4" type="video/mp4">
-						Your browser does not support the video tag.
-					</video>
-				</div>
+				<a href="mailto:bpetcaugh@holyghostprep.org?cc=Joseph.Pargola@dcf.nj.gov &subject=Possible%20Website%20Modification"> Contact bpetcaugh@holyghostprep.org (CC:Joseph.Pargola@dcf.nj.gov)</a>
+				<br /><br />
+				<br />
+				<h3>Code Base</h3>
+				<p>Here is the link to the GitHub code repo to be reviewed: <a href="https://github.com/bpetcaugh/NJsite">Github Link</a></p>
             </div>
         </div>
     </div>

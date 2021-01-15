@@ -1,13 +1,5 @@
 <?php include("connect.php"); ?>
-<?php
 
-// if(isset($_GET['policy_name']) )
-// {
-//   $n = $_GET['policy_name'];
-// 	echo $n;
-// }
-
-?>
 <!DOCTYPE html>
 <html>
 
@@ -37,12 +29,14 @@
 						-->
 						</div>
                     </nav>
+                    
 					<img src="./res/NJ_DCF_Logo.png" alt="NJ DCF" style="width: 45%; height: 50%;" class="headerLogo">
-
+          
 				</div>
 			</div>
 			<div class="body-wrapper">
-				<!-- Your code goes here -->
+        <!-- Your code goes here -->
+        <?php require("functions.php"); showAlert(); ?>
 				<h1>Department of Children and Families Policy Manual</h1>
 
 				<p>The Department of Children and Families' focus is on promoting 

@@ -114,9 +114,11 @@ echo "SESSION Policy: " . $_SESSION['policy']. "<br>";
 				</div>
 			</div>
 			<div class="body-wrapper">
-				<!-- Your code goes here -->
-				<h1>Department of Children and Families Policy Manual</h1>
-                <h3>Search policies</h3>
+                <!-- Your code goes here -->
+                <?php require("functions.php"); showAlert(); ?>
+                <h1>Department of Children and Families Policy Manual</h1>
+                <br />
+                <h2>Search Policies</h2>
 
 				<p>Use the search below to find a particular policy.</p>
 
@@ -247,7 +249,7 @@ echo "SESSION Policy: " . $_SESSION['policy']. "<br>";
                 </form>
 
                 <div class='btn-group'>
-                    <a class="btn btn-success" href="searchcategory.php?download=1" style="visibility:<?php if (isset($_SESSION['policy'])) {echo 'visible';} else {echo 'hidden;position:absolute';} ?>;">Download Policy</a>  
+                    <a class="btn btn-success" href="searchcategory.php?download=1" style="visibility:<?php if (isset($_SESSION['policy'])) {echo 'visible';} else {echo 'hidden;position:absolute';} ?>;">View File</a>  
                     <a class="btn btn-primary" href="searchcategory.php?reset=1">Reset Search</a>
                 </div>
 

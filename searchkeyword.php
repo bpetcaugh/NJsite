@@ -1,14 +1,5 @@
 <?php include("connect.php"); ?>
-<?php
 
-if(isset($_POST['sports'])) {
-    foreach($_POST['cats'] as $value){
-        echo "Categories: " .  $value;
-    }
-
-}
-
-?>
 <!DOCTYPE html>
 <html>
 
@@ -42,17 +33,19 @@ if(isset($_POST['sports'])) {
 				</div>
 			</div>
 			<div class="body-wrapper">
-				<!-- Your code goes here -->
+                <!-- Your code goes here -->
+                <?php require("functions.php"); showAlert(); ?>
 				<h1>Department of Children and Families Policy Manual</h1>
                 <br>
-                <h3>Search policies</h3>
+                <h3>Search Policies</h3>
 
                 <!-- Search form -->
-                <form  action="searchkeyword.php" method="post">
-                    <input class="form-control" type="text" placeholder="Search Keyword(s)" aria-label="Search" style="width:50%;">
+                <form  id="searchForm" action="searchkeyresults.php" method="post">
+                    <p>Search for keywords in policy names (to search multiple words, separate each word with a space).</p>
+                    <input class="form-control" type="text" name="keywordSearched" placeholder="Search Keyword(s)" aria-label="Search" style="width:50%;">
                     <fieldset>
                     <br>
-                        <p>Check the categories you would like to search through.</p>
+                        <p>Check the categories you would like to search through:</p>
                         
                         <p>
                             <?php
@@ -72,33 +65,25 @@ if(isset($_POST['sports'])) {
                         
                     </fieldset>
                     <button type="submit" class="btn btn-primary">Submit</button>
-                    <a class="btn btn-primary" style="color:#fff;" onclick="goBack()">Cancel</a>
+                    <a type="button" style="color:#FFF;" class="btn btn-primary" onclick="resetForm();">Reset</a>
                 </form>
+                
 
                 <br><br>
-
-                <?php
-                $sql = "SELECT * FROM mytable
-                WHERE column1 LIKE '%word1%'
-                   OR column1 LIKE '%word2%'
-                   OR column1 LIKE '%word3%'";
-
-                ?>
-<!--
-                <div class="card">
-                    <div class="card-header">
-                        Featured
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Download PDF</a>
-                    </div>
-                </div>-->
 				
 			</div>
 		</div>
-	</div>
+    </div>
+    
+    <script>
+        //Determine when to reset all values in the form. 
+        //This occurs when the user clicks the 'Reset' button. 
+
+        function resetForm() {
+            $('input[type=checkbox]').prop('checked',false);
+            $('#searchForm')[0].reset();
+        }
+    </script>
 
 
 			<!-- Login modal -->

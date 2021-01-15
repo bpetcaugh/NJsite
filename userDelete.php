@@ -13,7 +13,9 @@
     if(isset($_GET['finalId']) )
 	{
         // sql to delete a record
-    $sql = "DELETE FROM users WHERE id={$_GET['finalId']}";
+    $sql = "UPDATE users
+    SET deleted = 1
+    WHERE id={$_GET['finalId']}";
 
     if (mysqli_query($conn, $sql)) {
         header('Location: userList.php');

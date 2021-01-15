@@ -35,6 +35,74 @@ function checkSession(){
     }
 }
 
+/*
+Add an item for admin to approve
+*/
+function add_policy_approval_item($id_user, $policy_filename, $category, $comments) {
+    //categories: DELETE, MODIFY, ADD
+    global $conn;
+    //Delete file
+    $sql = "INSERT INTO policyupdates (userid, policyid, typeofupdate, changestatus, comments)
+    VALUES ({$id_user},'{$policy_filename}','{$category}', 'PENDING','{$comments}')";
+    mysqli_query($conn, $sql);
+
+}
+
+function update_checklist_approval($id,$decision,$adminuser) {
+    global $conn;
+    $current_time = time();
+    $sql = "UPDATE policyupdates SET approvedby='{$adminuser}',changestatus='{$decision}',updatedate=CURRENT_TIMESTAMP WHERE id={$id};";
+    mysqli_query($conn, $sql);
+}
+
+/*
+File Updates
+*/
+function deleteFile() {
+
+}
+
+function modifyFile() {
+    let x = 1;
+}
+
+function addNewCategory() {
+    let y = 1;
+}
+
+/*
+Usernames and Passwords
+*/
+
+function setPassword($user, $pw) {
+    $hash = password_hash($pw, PASSWORD_DEFAULT);
+
+    global $conn;
+    $sql = "UPDATE users SET password='" . $hash . "' WHERE username='" . $user . "';";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    
+    if ($user == $row['username'] && $hash == $row['password']) {
+        return True;
+    }
+    return False;
+}
+
+function isPasswordCorrect($user, $pw) {
+    global $conn;
+    $sql = "SELECT * FROM users WHERE username='" . $user . "';";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    
+    //Check that the users typed password (pw) is the same as the hashed password in the DB
+    if (is_array($row)) {
+        if (password_verify($pw, $row['password'])) {
+            return True;
+        }
+    }
+    return False;
+}
+
 //Set alerts 
 function setAlert($type, $message){
     $_SESSION['alert'] = "<div class='alert alert-$type' alert-dismissible' role='alert' id='alerts'>

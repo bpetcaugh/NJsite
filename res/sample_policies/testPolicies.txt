@@ -1,0 +1,12 @@
+INSERT INTO `policies` (`id`, `category`, `volume_num`, `volume_name`, `chapter_num`, `chapter_name`, `subch_num`, `subch_name`, `policy_num`, `policy_name`, `file_name`, `version`, `visible`) VALUES (NULL, 'Test Category', '1', 'Test Volume', 'A', 'Test Chapter', '1', 'Test Subchapter', '100', 'Test Policy', 'Policy1', '1', '1');
+
+id
+userid
+policyid
+typeofupdate: "DELETE", "MODIFY", "ADD"
+changestatus: "APPROVED", "DENIED", "PENDING"
+approvedby
+createdate (timestamp)
+updatedate
+
+SELECT * FROM policyupdates JOIN users on policyupdates.userid=users.id JOIN policies ON policyupdates.policyid=policies.id WHERE policyupdates.changestatus="PENDING";
