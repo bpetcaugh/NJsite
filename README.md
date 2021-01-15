@@ -17,5 +17,8 @@ Diagrams for the workflow of these functions will be placed here.
 ### Who uses this site?
 This site would be used internally by 46 local offices, with approximately 6600 staff, and 12 area offices.
 
+### Sensitive Files
+Some files were not included in this repository, since they contain passwords, database logins, or other sensitive information. These are available upon request. 
+
 ## Current Production ToDo List
 This will be updated accordingly.
