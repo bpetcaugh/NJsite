@@ -9,6 +9,7 @@ The following diagrams should be used to determine how the pages in the reposito
 
 ![Admin Webpage](res/diagrams/adminsite_diagram.PNG)
 
+
 ## Website Functionality
 ### Public Functions
 This site will be used by the public to search and download policies. It also contains an email template which can be used to contact the department with any requests.
@@ -20,6 +21,18 @@ This site will be used for three primary functions:
 3. Modify existing policies
 
 Diagrams for the workflow of these functions will be placed here.
+
+## Server Setup
+### File System
+![Server File System](res/diagrams/serverfiles_diagram.PNG)
+
+### Database
+There are several tables used in the database. All table structures can be viewed in the 'res' folder in 'DBtablestructure.sql.'
+
+## DB Tables
+1. users: stores all information for department member profiles
+2. policies: stores information on all policies for the site
+3. policychanges: stores information for updates and changes that have been made to each policy
 
 ## General Information
 ### Who uses this site?
