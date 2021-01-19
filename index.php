@@ -1,4 +1,9 @@
-<?php include("connect.php"); ?>
+<?php 
+
+	include("connect.php"); 
+	require("functions.php"); 
+
+?>
 
 <!DOCTYPE html>
 
@@ -33,7 +38,7 @@
 			</div>
 			<div class="body-wrapper">
         <!-- Main Body -->
-        <?php require("functions.php"); showAlert(); ?>
+        <?php //showAlert(); ?>
 				<h1>Department of Children and Families Policy Manual</h1>
 
 				<p>The Department of Children and Families' focus is on promoting 

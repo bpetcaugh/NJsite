@@ -56,19 +56,19 @@ function update_checklist_approval($id,$decision,$adminuser) {
 }
 
 /*
-File Updates
+File Updates: ADD IN LATER
 */
-function deleteFile() {
+// function deleteFile() {
 
-}
+// }
 
-function modifyFile() {
-    let x = 1;
-}
+// function modifyFile() {
+//     let x = 1;
+// }
 
-function addNewCategory() {
-    let y = 1;
-}
+// function addNewCategory() {
+//     let y = 1;
+// }
 
 /*
 Usernames and Passwords
@@ -115,9 +115,11 @@ function setAlert($type, $message){
 
 //Show alerts
 function showAlert(){
-    if($_SESSION['alert'] != "none"){
-        echo $_SESSION['alert'];
-        $_SESSION['alert'] = "none";
+    if(isset($_SESSION['alert'])){
+        if($_SESSION['alert'] != "none"){
+            echo $_SESSION['alert'];
+            $_SESSION['alert'] = "none";
+        }
     }
 }
 

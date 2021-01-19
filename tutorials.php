@@ -1,6 +1,6 @@
 <?php 
     include("connect.php");
-    require("./functions.php");
+    require("functions.php");
 	checkSession();
 ?>
 
