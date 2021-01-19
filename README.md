@@ -27,9 +27,9 @@ Diagrams for the workflow of these functions will be placed here.
 ![Server File System](res/diagrams/serverfiles_diagram.PNG)
 
 ### Database
-There are several tables used in the database. All table structures can be viewed in the 'res' folder in 'DBtablestructure.sql.'
+There are several tables used in the database. A detailed view of all table structures can be viewed in the 'res' folder in 'DBtablestructure.sql', and a brief list is included here.
 
-## DB Tables
+#### Database Tables
 1. users: stores all information for department member profiles
 2. policies: stores information on all policies for the site
 3. policychanges: stores information for updates and changes that have been made to each policy
