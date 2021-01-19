@@ -3,7 +3,7 @@
 		<table>
 			<tr>
 				<td width="40%">
-					<a href="index.php"><img src="./res/dcf_logo_square.png" width="100%" alt="DCF"></a>
+					<a href="index.php"><img src="./res/images/dcf_logo_square.png" width="100%" alt="DCF"></a>
 				</td>
 				<td width="60%" style="padding-left: 15px;">
 					<button type="button" class=" btn btn-primary login mx-auto d-block" data-toggle="modal" data-target="#login" style="position:relative; bottom: 30px; left:20%;">Login</button>

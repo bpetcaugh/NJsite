@@ -1,7 +1,6 @@
 <?php include("connect.php"); ?>
 
 <!DOCTYPE html>
-<html>
 
 <head>
 	<title>DCF Policies</title>
@@ -28,7 +27,7 @@
 						</div>
                     </nav>
                     
-					<img src="./res/NJ_DCF_Logo.png" alt="NJ DCF" style="width: 45%; height: 50%;" class="headerLogo">
+					<img src="./res/images/NJ_DCF_Logo.png" alt="NJ DCF" style="width: 45%; height: 50%;" class="headerLogo">
           
 				</div>
 			</div>
@@ -69,8 +68,8 @@
 				of policies and regulations.</p>
 				<table style="width:100%;">
 				<tr style="width:100%;">
-					<td style="width:50%; padding: 5px;"><img style="width:100%" src="./res/polbanner.png"></td>
-					<td style="width:50%; padding: 5px;"><img style="width:100%" src="./res/PolPic.jpg"></td>
+					<td style="width:50%; padding: 5px;"><img style="width:100%" src="./res/images/polbanner.png"></td>
+					<td style="width:50%; padding: 5px;"><img style="width:100%" src="./res/images/PolPic.jpg"></td>
 				</tr>
 				</table>
 <p style="text-align: center;">

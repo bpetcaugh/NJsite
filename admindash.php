@@ -37,7 +37,7 @@
 							</button>
 						</div>
                     </nav>
-					<img src="./res/NJ_DCF_Logo.png" alt="NJ DCF" style="width: 45%; height: 50%;" class="headerLogo">
+					<img src="./res/images/NJ_DCF_Logo.png" alt="NJ DCF" style="width: 45%; height: 50%;" class="headerLogo">
 				</div>
 			</div>
 			<div class="body-wrapper">

@@ -1,12 +1,11 @@
 <?php include("connect.php"); ?>
 
 <!DOCTYPE html>
-<html>
 
 <head>
 	<title>DCF Policies</title>
 
-	<?php include("./includes/header.php"); ?>
+	<?php include("header.php"); ?>
 
 	 <style>
 		.panel-heading .accordion-toggle:after {
@@ -39,7 +38,7 @@
 <body>
 	<div class="wrapper">
 		<!-- Sidebar -->
-		<?php include("./includes/sidebar.php"); ?>
+		<?php include("sidebar.php"); ?>
 
 		<div id="content">
 			<div class="header">
@@ -51,12 +50,9 @@
 								<span></span>
 								<span></span>
 							</button>
-							<!--<i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
-						-->
 						</div>
                     </nav>
 					<img src="./res/NJ_DCF_Logo.png" alt="Holy Ghost Prep" style="width: 45%; height: 50%;" class="headerLogo">
-				    <!--<h1 class="headerTitle">New Jersey</h1>-->
 				</div>
 			</div>
 			<div class="body-wrapper">
@@ -65,7 +61,6 @@
         <h1>Contact Form</h1>
         <p>Fill out all necessary information in the boxes provided, and submit the form below.</p>
         <br />
-<!--class="needs-validation" novalidate-->
         <form  class="needs-validation" method="post" action="emailsend.php" novalidate>
           <h2>Personal Information</h2>
           <!-- ROW 1 -->
@@ -237,11 +232,9 @@
                     </div>
                 </div>
             </div>
-			<?php //include("./includes/jslibraries.php"); ?>
 			<!-- javascript libraries -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-	<!--<script src="NJadminpage.js"></script>-->
 </body>
 </html>
