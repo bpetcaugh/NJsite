@@ -1,12 +1,11 @@
 <?php include("connect.php"); ?>
 <?php
-    require("./functions.php");
-	checkSession();
-	$fileset = false;
-	
-	if(isset($_POST['myFile']) )
-	{
-		$fileset = true;
+    require("functions.php");
+    checkSession();
+    
+    if(isset($_POST['newPW'])) {
+        setPassword(getUserInfo($_SESSION['id'], "username"),$_POST['newPW']);
+        header('Location: userProfile.php');
     }
 
     if(isset($_POST['accessLevel']) )
@@ -44,19 +43,45 @@
 
 
 <!DOCTYPE html>
-<html>
 
 <head>
 	<title>DCF Policies</title>
 
-	<?php include("./includes/header.php"); ?>
+	<?php include("header.php"); ?>
+
+    <style>
+        label
+        {
+            width: 100px;
+        }
+
+        .alert
+        {
+            display: none;
+        }
+
+        .requirements
+        {
+            list-style-type: none;
+        }
+
+        .wrong .fa-check
+        {
+            display: none;
+        }
+
+        .good .fa-times
+        {
+            display: none;
+        }
+    </style>
 
 </head>
 
 <body>
 	<div class="wrapper">
 		<!-- Sidebar -->
-		<?php include("./includes/adminSidebar.php"); ?>
+		<?php include("adminSidebar.php"); ?>
 
 		<div id="content">
 			<div class="header">
@@ -68,133 +93,151 @@
 								<span></span>
 								<span></span>
 							</button>
-							<!--<i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
-						-->
 						</div>
                     </nav>
-					<img src="./res/NJ_DCF_Logo.png" alt="NJ DCF" style="width: 45%; height: 50%;" class="headerLogo">
-				    <!--<h1 class="headerTitle">New Jersey</h1>-->
+					<img src="./res/images/NJ_DCF_Logo.png" alt="NJ DCF" style="width: 45%; height: 50%;" class="headerLogo">
 				</div>
 			</div>
 			<div class="body-wrapper">
 				<!-- Your code goes here -->
-                <h1>Change Password</h1>
-                <p>This page is currently being worked on.</p>
+                <h1>Change Your User Password</h1>
+
+                <form class="needs-validation" action="userChangePW.php" method="post">
+                <div class="row my-5">
+                    <div class="col-md-4">
+                        <div class="md-form">
+                        <i class="fas fa-lock prefix"></i>
+                        <input type="password" id="inputValidationEx2" class="form-control validate" name="newPW">
+                        <label for="inputValidationEx2" data-error="wrong" data-success="right" style="width:200px;">Type your password</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+
+                        <div class="alert alert-warning password-alert" role="alert">
+                        <ul>
+                            <li class="requirements leng"><i class="fas fa-check green-text"></i><i class="fas fa-times red-text"></i> Your password must have at least 8 chars.</li>
+                            <li class="requirements big-letter"><i class="fas fa-check green-text"></i><i class="fas fa-times red-text"></i> Your password must have at least 1 big letter.</li>
+                            <li class="requirements num"><i class="fas fa-check green-text"></i><i class="fas fa-times red-text"></i> Your password must have at least 1 number.</li>
+                            <li class="requirements special-char"><i class="fas fa-check green-text"></i><i class="fas fa-times red-text"></i> Your password must have at least 1 special char.</li>
+                            <!--<li class="requirements matching"><i class="fas fa-check green-text"></i><i class="fas fa-times red-text"></i> Your passwords must match.</li>-->
+                        </ul>
+                        </div>
+
+                    </div>
+                    </div>
+
+                </div>
+                <!--
+                <div class="row my-5">
+                    <div class="col-md-4">
+                            <div class="md-form">
+                            <i class="fas fa-lock prefix"></i>
+                            <input type="password" id="inputValidationEx3" class="form-control validate">
+                            <label for="inputValidationEx2" data-error="wrong" data-success="right" style="width:200px;">Re-Type your password</label>
+                            </div>
+                    </div>
+                </div>-->
+                <button class="btn btn-success" type="submit">Save</button>
+
+                </form>
+
+            
                 <button class="btn btn-primary" onclick="goBack()">Go Back</button>
-<!--
-                <form class="needs-validation" action="userAdd.php" method="post" novalidate>
-                    <div class="form-row">
-                        <div class="col-md-4 mb-3">
-                        <label for="validationCustom01">First name</label>
-                        <input type="text" class="form-control" id="validationCustom01" name="firstName" placeholder="First name"
-                            required>
-                            <div class="invalid-feedback">
-                            Please provide a first name.
-                        </div>
-
-                        </div>
-                        <div class="col-md-4 mb-3">
-                        <label for="validationCustom02">Last name</label>
-                        <input type="text" class="form-control" id="validationCustom02" name="lastName" placeholder="Last name"
-                            required>
-                            <div class="invalid-feedback">
-                            Please provide a last name.
-                        </div>
-
-                        </div>
-                        <div class="col-md-4 mb-3">
-                        <label for="validationCustomUsername">Username</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroupPrepend">@</span>
-                            </div>
-                            <input type="text" class="form-control" id="validationCustomUsername" name="userName" placeholder="Username"
-                            aria-describedby="inputGroupPrepend" required>
-                            <div class="invalid-feedback">
-                            Please choose a username.
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-md-6 mb-3">
-                        <label for="validationCustom03">Email</label>
-                        <input type="text" class="form-control" id="validationCustom03" name="email" placeholder="Email" required>
-                        <div class="invalid-feedback">
-                            Please provide a valid email address.
-                        </div>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                        <label for="validationCustom04">Office</label>
-                        <input type="text" class="form-control" id="validationCustom04" name="office" placeholder="Office" required>
-                        <div class="invalid-feedback">
-                            Please provide a valid office.
-                        </div>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                        <label for="validationCustom05">Cost Code</label>
-                        <input type="text" class="form-control" id="validationCustom05" name="costCode" placeholder="Cost Code" required>
-                        <div class="invalid-feedback">
-                            Please provide a valid cost code.
-                        </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-md-3 mb-3">
-                        <label for="validationCustom04">Temporary Password</label>
-                        <input type="password" class="form-control" id="validationCustom04" name="password" required>
-                        <div class="invalid-feedback">
-                            Please provide a temporary password to the user.
-                        </div>
-                        </div>        
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <div class="form-check">
-                        <input type="radio" class="form-check-input" id="standard" name="accessLevel" value="standard" checked>
-                        <label class="form-check-label" for="accessLevel">Standard</label>
-                        </div>
-
-                        <div class="form-check">
-                        <input type="radio" class="form-check-input" id="admin" name="accessLevel" value="root">
-                        <label class="form-check-label" for="accessLevel">Admin</label>
-                        </div>
-
-                    </div>
-                    <button class="btn btn-success" type="submit">Save</button>
-                    <a class="btn btn-primary" href="userList.php">Cancel</a>
-                    </form>
--->
             </div>
         </div>
     </div>
 
 			<!-- javascript libraries -->
-<?php //include("./includes/jslibraries.php"); ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
 <script src="NJPage.js"></script>
 <script>
-(function() {
-'use strict';
-window.addEventListener('load', function() {
-// Fetch all the forms we want to apply custom Bootstrap validation styles to
-var forms = document.getElementsByClassName('needs-validation');
-// Loop over them and prevent submission
-var validation = Array.prototype.filter.call(forms, function(form) {
-form.addEventListener('submit', function(event) {
-if (form.checkValidity() === false) {
-event.preventDefault();
-event.stopPropagation();
-}
-form.classList.add('was-validated');
-}, false);
+//Function code taken (and modified) from: https://mdbootstrap.com/snippets/jquery/tomekmakowski/631899#js-tab-view
+$(function () {
+    var $password = $(".form-control[type='password']");
+    var $passwordAlert = $(".password-alert");
+    var $requirements = $(".requirements");
+    var leng, bigLetter, num, specialChar;
+    var $leng = $(".leng");
+    var $bigLetter = $(".big-letter");
+    var $num = $(".num");
+    var $specialChar = $(".special-char");
+    var specialChars = "!@#$%^&*()-_=+[{]}\\|;:'\",<.>/?`~";
+    var numbers = "0123456789";
+
+    $requirements.addClass("wrong");
+    $password.on("focus", function(){$passwordAlert.show();});
+
+    $password.on("input blur", function (e) {
+        var el = $(this);
+        var val = el.val();
+        $passwordAlert.show();
+
+        if (val.length < 8) {
+            leng = false;
+        }
+        else if (val.length > 7) {
+            leng=true;
+        }
+        
+
+        if(val.toLowerCase()==val){
+            bigLetter = false;
+        }
+        else{bigLetter=true;}
+        
+        num = false;
+        for(var i=0; i<val.length;i++){
+            for(var j=0; j<numbers.length; j++){
+                if(val[i]==numbers[j]){
+                    num = true;
+                }
+            }
+        }
+        
+        specialChar=false;
+        for(var i=0; i<val.length;i++){
+            for(var j=0; j<specialChars.length; j++){
+                if(val[i]==specialChars[j]){
+                    specialChar = true;
+                }
+            }
+        }
+
+        console.log(leng, bigLetter, num, specialChar);
+        
+        if(leng==true&&bigLetter==true&&num==true&&specialChar==true){
+            $(this).addClass("valid").removeClass("invalid");
+            $requirements.removeClass("wrong").addClass("good");
+            $passwordAlert.removeClass("alert-warning").addClass("alert-success");
+        }
+        else
+        {
+            $(this).addClass("invalid").removeClass("valid");
+            $passwordAlert.removeClass("alert-success").addClass("alert-warning");
+
+            if(leng==false){$leng.addClass("wrong").removeClass("good");}
+            else{$leng.addClass("good").removeClass("wrong");}
+
+            if(bigLetter==false){$bigLetter.addClass("wrong").removeClass("good");}
+            else{$bigLetter.addClass("good").removeClass("wrong");}
+
+            if(num==false){$num.addClass("wrong").removeClass("good");}
+            else{$num.addClass("good").removeClass("wrong");}
+
+            if(specialChar==false){$specialChar.addClass("wrong").removeClass("good");}
+            else{$specialChar.addClass("good").removeClass("wrong");}
+        }
+        
+        
+        if(e.type == "blur"){
+                $passwordAlert.hide();
+            }
+    });
 });
-}, false);
-})();
 
 function goBack() {
   window.history.back();

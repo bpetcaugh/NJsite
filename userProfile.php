@@ -65,6 +65,7 @@
 			<div class="body-wrapper">
 				<!-- Your code goes here -->
                 <h1>My Profile</h1>
+                <?php showAlert(); ?>
 
                 <?php
 

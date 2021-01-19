@@ -21,6 +21,13 @@
 			<a href="userProfile.php">My Profile</a>
 		</li>
 
+		<?php
+		if ($_SESSION["setAccessLevel"]) {
+			echo '		<li>
+			<a href="userList.php">User Information</a>
+		</li>';
+		} ?>
+
 		<li>
 			<a href="tutorials.php">Tutorials</a>
 		</li>
@@ -49,16 +56,10 @@
 		if ($_SESSION["setAccessLevel"]) {
 			echo '		<hr style="width:90%; border:1px solid #00c8ff;" >';
 			echo '		<li>
-			<a href="userList.php">User Information</a>
-		</li>';
-		} ?>
-
-		<?php
-		if ($_SESSION["setAccessLevel"]) {
-			echo '		<li>
 			<a href="pendingUpdates.php">Pending Updates</a>
 		</li>';
 		} ?>
+		
 		<?php
 		if ($_SESSION["setAccessLevel"]) {
 			echo '		<li>

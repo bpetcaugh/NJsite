@@ -80,11 +80,12 @@ function setPassword($user, $pw) {
     global $conn;
     $sql = "UPDATE users SET password='" . $hash . "' WHERE username='" . $user . "';";
     $result = mysqli_query($conn, $sql);
-    $row = mysqli_fetch_assoc($result);
     
-    if ($user == $row['username'] && $hash == $row['password']) {
+    if ($result) {
+        setAlert("success", "Successfully changed password."); 
         return True;
     }
+    setAlert("danger", "Error trying to reset your password."); 
     return False;
 }
 

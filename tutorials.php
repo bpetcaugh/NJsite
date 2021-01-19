@@ -39,6 +39,14 @@
 				<h1>Tutorials</h1>
                 <p>Below will be tutorial videos on different aspects of using the website.</p>
 
+				<h2>Introduction Video (Uploaded 01/10/21)</h2>
+				<p>This video will introduce new users to the different functionality of the webpage.</p>
+				<video width="60%" controls>
+					<source src="./res/videos/intro_tutorial.mp4" type="video/mp4">
+					Your browser does not support the video tag.
+				</video>
+
+
 		    </div>
         </div>
     </div>
