@@ -6,7 +6,6 @@
 					<a href="admindash.php"><img src="./res/dcf_logo_square.png" width="100%" alt="DCF"></a>
 				</td>
 				<td width="60%" style="padding-left: 15px;">
-				    <!-- <img src="./res/icon-login.png" width="45px"> -->
                     <form action="logout.php">
                         <input type="submit" class="btn btn-primary login mx-auto d-block" value="Logout" style="position:relative; bottom: 30px; left:20%;" />
                     </form>

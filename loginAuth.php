@@ -21,11 +21,12 @@
             $_SESSION["id"] = $row["id"];
             if ($row['accessLevel'] == 'root') {
                 $_SESSION["setAccessLevel"] = true;
-                header("location: admindash.php");
+                //header("location: admindash.php");
             } else {
                 $_SESSION["setAccessLevel"] = false;
-                header("location: standarddash.php");
+                //header("location: standarddash.php");
             }
+            header("location: admindash.php");
         }else{
             setAlert("danger", "Login failed. Please try again."); 
             //header('Location: '.$_SERVER['REQUEST_URI']);

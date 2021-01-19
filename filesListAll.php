@@ -1,24 +1,22 @@
-<?php include("connect.php"); ?>
-<?php
+<?php 
+    include("connect.php");
     require("./functions.php");
     checkSession();
 
 ?>
 
 <!DOCTYPE html>
-<html>
-
 <head>
 	<title>DCF Policies</title>
 
-	<?php include("./includes/header.php"); ?>
+	<?php include("header.php"); ?>
 
 </head>
 
 <body>
 	<div class="wrapper">
 		<!-- Sidebar -->
-		<?php include("./includes/adminSidebar.php"); ?>
+		<?php include("adminSidebar.php"); ?>
 
 		<div id="content">
 			<div class="header">
@@ -42,17 +40,9 @@
                 <table class="table">
                     <thead>
                         <tr>
-                        <th scope="col">Category</th>
-                        <th scope="col">FileName</th>
-                        <th scope="col">File On Server</th>
-                        <!--
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Office</th>  
-                        <th scope="col">Cost Code</th>                     
-                        <th scope="col">Access Level</th>
-                        <th scope="col">Action</th>-->
+                            <th scope="col">Category</th>
+                            <th scope="col">FileName</th>
+                            <th scope="col">File On Server</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -74,30 +64,11 @@
                             echo "<td style='background: red; color: #fff;'> No </td>";
                         }
 
-                        /*if($_SESSION["id"] == $row["id"]) {
-                            echo "<td>
-                                <a class='btn btn-primary' href='userEdit.php?id=" . $row["id"] . "'>Edit</a>
-                            </td>
-                            ";
-                        } else {
-
-                        echo "<td>
-
-                        <div class='btn-group'>
-                            <a class='btn btn-primary' href='userEdit.php?id=" . $row["id"] . "'>Edit</a>
-    
-                            <a class='btn btn-danger' href='userDelete.php?id=" . $row["id"] . "'>Delete</a>
-                        </div>
-                        </td>
-                        ";
-                        }*/
-
-
-                    echo "</tr>";
+                        echo "</tr>";
 
                     }
                     } else {
-                    echo "Currently No Files In the Database";
+                        echo "Currently No Files In the Database";
                     }
 
                     mysqli_close($conn);
@@ -105,25 +76,11 @@
                     </tbody>
                 </table>
 
-                <div class="card">
-                    <div class="card-header">
-                        Featured
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Download PDF</a>
-                    </div>
-                </div>
-<br>
-                <a class="btn btn-primary" href="userAdd.php">Add New User</a>
-
             </div>
         </div>
     </div>
 
 			<!-- javascript libraries -->
-<?php //include("./includes/jslibraries.php"); ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>

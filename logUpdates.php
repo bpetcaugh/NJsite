@@ -1,24 +1,23 @@
-<?php include("connect.php"); ?>
-<?php
-    require("./functions.php");
+<?php 
+    include("connect.php");
+    require("functions.php");
     checkSession();
 
 ?>
 
 <!DOCTYPE html>
-<html>
 
 <head>
 	<title>DCF Policies</title>
 
-	<?php include("./includes/header.php"); ?>
+	<?php include("header.php"); ?>
 
 </head>
 
 <body>
 	<div class="wrapper">
 		<!-- Sidebar -->
-		<?php include("./includes/adminSidebar.php"); ?>
+		<?php include("adminSidebar.php"); ?>
 
 		<div id="content">
 			<div class="header">
@@ -82,7 +81,6 @@
     </div>
 
 			<!-- javascript libraries -->
-<?php //include("./includes/jslibraries.php"); ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
