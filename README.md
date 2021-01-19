@@ -23,6 +23,13 @@ This site will be used for three primary functions:
 Diagrams for the workflow of these functions will be placed here.
 
 ## Server Setup
+### Transfer to New Server
+In order to move this site to another server, complete the following tasks:
+1. Upload all files from the 'File System' diagram below.
+2. Upload the 'connect.php' file, and any other sensitive files that are not included in the repository.
+3. Import the database by using the 'database_upload_all.sql' file (also not included in the repository).
+4. Upload all policy files to the folder ./res/policies (very large batch of files).
+
 ### File System
 ![Server File System](res/diagrams/serverfiles_diagram.PNG)
 
