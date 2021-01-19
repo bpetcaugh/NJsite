@@ -6,14 +6,14 @@
 <head>
 	<title>DCF Policies</title>
 
-	<?php include("./includes/header.php"); ?>
+	<?php include("header.php"); ?>
 
 </head>
 
 <body>
 	<div class="wrapper">
 		<!-- Sidebar -->
-		<?php include("./includes/sidebar.php"); ?>
+		<?php include("sidebar.php"); ?>
 
 		<div id="content">
 			<div class="header">
@@ -25,8 +25,6 @@
 								<span></span>
 								<span></span>
 							</button>
-							<!--<i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
-						-->
 						</div>
                     </nav>
                     
@@ -35,7 +33,7 @@
 				</div>
 			</div>
 			<div class="body-wrapper">
-        <!-- Your code goes here -->
+        <!-- Main Body -->
         <?php require("functions.php"); showAlert(); ?>
 				<h1>Department of Children and Families Policy Manual</h1>
 
@@ -85,77 +83,6 @@ Main Number:  609-888-7030<br>
 Policy Mailbox:  <a href="mailto:Policy@dcf.nj.gov?subject=DCF%20Policy&body=My%20Inquiry:" style="text-decoration: underline;">Policy@dcf.nj.gov</a> <br></b>
 
 </p>
-<!--
-        <h4>Search Policies</h4>
-        <p>Select below if you would like to search for a policy by category, or by keyword.</p>
-
-        <a class="btn btn-primary btn-lg" href="searchcategory.php">Category</a>
-        <a class="btn btn-primary btn-lg" href="searchkeyword.php">Keyword</a>
--->
-<!--
-				<h4>List of Policies</h4>
-				<p>Below is a comprehensive list of all policies:</p>
-				<h4>Download Document Version</h4>
-        -->
-
-<!--
-<form method="get" action="getpolicy.php">
-  <div class="form-group">
-    <label for="cat">Category</label>
-    <select class="form-control" id="cat">
-      <option>Administrative Orders</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="vol">Volumes</label>
-    <select class="form-control" id="vol">
-      <option>Vol. I - Mission, Vision and Guiding Principles</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="chapter">Chapter</label>
-    <select class="form-control" id="chapter">
-      <option>Chapter A - Mission, Vision and Guiding Principles</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="subchapter">SubChapter</label>
-    <select class="form-control" id="subchapter">
-      <option>Subchapter 1 - Mission, Vision and Guiding Principles</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="subchapter">Policy</label>
-    <select name="policy_name" class="form-control" id="policy">
-      <option value="CPP-I-A-1-100">100 - CP&P Mission, Vision and Goals - CPP-I-A-1-100</option>
-	  <option value="CPP-I-A-1-150">150 - Legal Provisions for Intervention - CPP-I-A-1-150</option>
-	  <option value="CPP-I-A-1-200">200 - Case Management Philosophy - CPP-I-A-1-200</option>
-	  <option value="CPP-I-A-1-300">300 - Partnership in Assessment, Case Planning, and Service Implementation - CPP-I-A-1-300</option>
-	  <option value="CPP-I-A-1-400">400 - Comprehensive Community Support System - CPP-I-A-1-400</option>
-	  <option value="SAMPLE-POLICY-1">500 - SAMPLE POLICY TO TEST</option>
-    </select>
-  </div>
-
-  <button type="submit" class="btn btn-primary">Download PDF</button>
-</form>-->
-
-<!-- SAMPLE FORM FOR EMAIL <form>
-  <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-  </div>
-  <div class="form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
--->
 
 				<br>
 <h4>Disclaimer</h4>
@@ -168,13 +95,8 @@ Department's current practices. <p>
 
 <p style="text-align: center;"><b>Have a policy inquiry or suggestion?  <a style="text-decoration: underline;" href="http://cs.holyghostprep.org/njdcf/contactform.php">Email us here.</a> <p>
 
-<!--
-<a style="text-decoration: underline;" href="mailto:Policy@dcf.nj.gov?subject=DCF%20Policy&body=My%20Inquiry:">Policy@dcf.nj.gov</a></b><p>
--->
 <p><a href="https://www.nj.gov/dcf/" style="text-decoration: underline;">DCF Home</a></p>
 
-				
-				
 				</div>
 			</div>
 		</div>
@@ -210,13 +132,11 @@ Department's current practices. <p>
                     </div>
                 </div>
             </div>
-			<?php //include("./includes/jslibraries.php"); ?>
 
 			<!-- javascript libraries -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <script src="NJPage.js"></script>
-	<!--<script src="NJadminpage.js"></script>-->
 </body>
 </html>

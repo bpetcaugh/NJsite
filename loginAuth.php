@@ -5,17 +5,11 @@
     $myusername=strip($_POST['username']);
     $mypassword=strip($_POST['password']);
 
-    
-
-    //$mypassword = md5($mypassword);
-    
-
     if(!$conn) {
         die();
         setAlert("danger", "Cannot connect to the database. Please try again soon.");
         header("location: index.php");
     }
-
 
     if(checkToken($_POST['token'])){
         

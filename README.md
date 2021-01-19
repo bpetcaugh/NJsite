@@ -2,6 +2,11 @@
 ## Introduction
 This website is being built by students at Holy Ghost Preparatory School, with oversight by their instructor (Mr. Brandon Petcaugh). It will serve to replace the existing site housing all files/policies/regulations for the NJ Department of Children and Families. [Link To Existing Site](https://www.nj.gov/dcf/policy_manuals/toc.shtml) 
 
+## Webpage Flowcharts
+The following are diagrams, which should be used to determine how the pages in the repository are connected to one another.
+
+![Public Webpage](res/diagrams/publicsite_diagram.PNG)
+
 ## Website Functionality
 ### Public Functions
 This site will be used by the public to search and download policies. It also contains an email template which can be used to contact the department with any requests.
